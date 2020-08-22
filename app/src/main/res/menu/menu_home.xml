@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/setgoals"
+        android:title="Set Goals"
+        android:icon="@drawable/setgoals"/>
+
+    <item
+        android:id="@+id/bunkcheck"
+        android:title="Bunk Check"
+        android:icon="@drawable/bunkcheck"/>
+
+    <item android:id="@+id/personalInfo"
+        android:title="Personal Info"
+        android:icon="@drawable/personalinfo"
+        />
+
+    <item android:id="@+id/saved_Posts"
+        android:title="Saved Posts"
+        android:icon="@drawable/ic_saved"/>
+
+    <item android:title="Others">
+        <menu>
+            <item android:title="Settings"
+                android:id="@+id/menuSettings"
+                android:icon="@drawable/ic_settings"/>
+
+            <item android:id="@+id/menuSuggestions"
+                android:title="Suggestions"
+                android:icon="@drawable/feedback"/>
+
+            <item android:id="@+id/menuAboutUs"
+                android:title="About Us"
+                android:icon="@drawable/aboutus"/>
+
+            <item android:title="Logout"
+                android:id="@+id/menuLogout"
+                android:icon="@drawable/ic_logout"/>
+        </menu>
+    </item>
+</menu>
