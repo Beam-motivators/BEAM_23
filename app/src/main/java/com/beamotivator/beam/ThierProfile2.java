@@ -1,9 +1,11 @@
 package com.beamotivator.beam;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -11,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,7 +56,7 @@ public class ThierProfile2 extends AppCompatActivity {
     ImageView avatarIv, coverIv;
     TextView nameTv, emailTv ;
     private SectionsPagerAdapter sectionsPagerAdapter;
-
+SharedPreferences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,7 @@ public class ThierProfile2 extends AppCompatActivity {
         }
         setContentView(R.layout.activity_their_profile2);
         avatarIv = findViewById(R.id.avatarIv);
+        sh= getSharedPreferences("posts",MODE_PRIVATE);
 
         Toolbar profileTlbr = findViewById(R.id.profileToolbar);
         tabLayout = findViewById(R.id.news_tab);
@@ -336,5 +340,12 @@ public class ThierProfile2 extends AppCompatActivity {
             return 1;
         }
     }
+    public void onBackPressed() {
+
+        SharedPreferences.Editor e = sh.edit();
+        e.clear();
+        e.apply();
+        finish();
+     }
 
 }

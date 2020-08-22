@@ -3,11 +3,13 @@ package com.beamotivator.beam.adapters;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,6 +38,7 @@ import com.beamotivator.beam.R;
 import com.beamotivator.beam.ThierProfile;
 import com.beamotivator.beam.ThierProfile2;
 import com.beamotivator.beam.Variables;
+import com.beamotivator.beam.fragments.FragmentMy_Post;
 import com.beamotivator.beam.models.ModelPost;
 import com.beamotivator.beam.models.ModelUser;
 import com.bumptech.glide.Glide;
@@ -75,6 +78,8 @@ import java.util.Objects;
 import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
@@ -453,7 +458,13 @@ else {
 
     Intent intent = new Intent(context, ThierProfile2.class);
     intent.putExtra("uid",uid);
+    SharedPreferences sh=context.getSharedPreferences("posts",MODE_PRIVATE);
+    SharedPreferences.Editor ee=sh.edit();
+    ee.putString("uid",uid);
+    ee.apply();
+
     context.startActivity(intent);
+
    // Toast.makeText(context, "no entry", Toast.LENGTH_SHORT).show();
 }
 

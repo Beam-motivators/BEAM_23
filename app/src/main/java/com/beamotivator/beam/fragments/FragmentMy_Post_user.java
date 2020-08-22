@@ -7,16 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beamotivator.beam.R;
-import com.beamotivator.beam.SavedPost;
 import com.beamotivator.beam.adapters.AdapterPosts;
 import com.beamotivator.beam.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +28,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class FragmentMy_Post extends Fragment {
+public class FragmentMy_Post_user extends Fragment {
 
     RecyclerView savedPostsRv;
 
@@ -43,7 +40,7 @@ public class FragmentMy_Post extends Fragment {
     String ig = "";
     int count  = 0;
     SharedPreferences sh;
-    public FragmentMy_Post() {
+    public FragmentMy_Post_user() {
     }
 
 
@@ -59,7 +56,7 @@ public class FragmentMy_Post extends Fragment {
 
         sh= getActivity().getSharedPreferences("posts",MODE_PRIVATE);
 
-
+ 
 
         savedPostsRv =root. findViewById(R.id.myposts);
 
@@ -99,7 +96,7 @@ public class FragmentMy_Post extends Fragment {
 
         //now check for the post details
         DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Posts");
-        ref1.orderByChild("uid").equalTo(sh.getString("uid",null)).addValueEventListener(new ValueEventListener() {
+        ref1.orderByChild("uid").equalTo(myId).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
 
