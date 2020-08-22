@@ -33,9 +33,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beamotivator.beam.Imagepopup.PhotoFullPopupWindow;
 import com.beamotivator.beam.adapters.AdapterComments;
 import com.beamotivator.beam.models.ModelComment;
 import com.bumptech.glide.Glide;
@@ -85,7 +87,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
     List<ModelComment> commentList;
     AdapterComments adapterComments;
-
+RelativeLayout pImage22;
     //add comment views
     EditText commentEt;
     ImageButton sendBtn;
@@ -133,6 +135,7 @@ public class PostDetailActivity extends AppCompatActivity {
         likeBtn = findViewById(R.id.likeBtn);
         profileLayout = findViewById(R.id.profileLayout);
         recyclerView = findViewById(R.id.recyclerView);
+        pImage22 = findViewById(R.id.pImage22);
 
         //comment views init
         commentEt = findViewById(R.id.commentEt);
@@ -142,6 +145,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         Animation animation = AnimationUtils.loadAnimation(PostDetailActivity.this, R.anim.scale);
         shareBtn.startAnimation(animation);
+
         loadPostInfo();
 
         checkuserstatus();
@@ -716,7 +720,16 @@ public class PostDetailActivity extends AppCompatActivity {
                     } catch (Exception ignored) {
                     }
                 }
+                pImageIv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
+
+
+                        new PhotoFullPopupWindow(PostDetailActivity.this, R.layout.popup_photo_full,  pImage22,pImage, null);
+
+                    }
+                });
             }
 
 

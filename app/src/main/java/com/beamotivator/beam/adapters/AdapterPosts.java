@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import android.view.Gravity;
@@ -32,9 +34,18 @@ import com.beamotivator.beam.PostDetailActivity;
 import com.beamotivator.beam.PostLikedByActivity;
 import com.beamotivator.beam.R;
 import com.beamotivator.beam.ThierProfile;
+import com.beamotivator.beam.Variables;
 import com.beamotivator.beam.models.ModelPost;
 import com.beamotivator.beam.models.ModelUser;
 import com.bumptech.glide.Glide;
+import com.downloader.Error;
+import com.downloader.OnCancelListener;
+import com.downloader.OnDownloadListener;
+import com.downloader.OnPauseListener;
+import com.downloader.OnStartOrResumeListener;
+import com.downloader.PRDownloader;
+import com.downloader.Progress;
+import com.downloader.request.DownloadRequest;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -46,6 +57,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
@@ -682,6 +694,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         });
         popupMenu.getMenu().add(Menu.NONE,2,0,"Details");
 
+        popupMenu.getMenu().add(Menu.NONE,3,0,"Save");
 
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -700,7 +713,79 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                     intent.putExtra("postId",pId);
                     context.startActivity(intent);
                 }
+                else if(id == 3)
+                {
+                    //start post detail activity
+startDownload();                }
                 return false;
+            }
+
+            private void startDownload() {
+
+                final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme);
+                progressDialog.setCancelable(false);
+                progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+                progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                progressDialog.show();
+                PRDownloader.initialize(context);
+                DownloadRequest prDownloader= PRDownloader.download(pImage, Variables.app_showing_folder, pImage+".jpg")
+                        .build()
+                        .setOnStartOrResumeListener(new OnStartOrResumeListener() {
+                            @Override
+                            public void onStartOrResume() {
+
+                            }
+                        })
+                        .setOnPauseListener(new OnPauseListener() {
+                            @Override
+                            public void onPause() {
+
+                            }
+                        })
+                        .setOnCancelListener(new OnCancelListener() {
+                            @Override
+                            public void onCancel() {
+
+                            }
+                        });
+
+
+                prDownloader.start(new OnDownloadListener() {
+                    @Override
+                    public void onDownloadComplete() {
+                        progressDialog.dismiss();
+                        downloadtost();
+
+
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        //   Functions.cancel_determinent_loader();
+                        progressDialog.dismiss();
+
+                    }
+
+
+
+                    private void downloadtost() {
+                        Toast toast = new Toast(context);
+                        toast.setDuration(Toast.LENGTH_LONG);
+
+                        //inflate view
+                        View custom_view =LayoutInflater.from(context).inflate(R.layout.custam_tost1,null);
+                        ((TextView) custom_view.findViewById(R.id.message)).setText("Saved Successfully");
+                        ((CardView) custom_view.findViewById(R.id.parent_view)).setCardBackgroundColor(context.getResources().getColor(R.color.colorWhite));
+
+                        toast.setView(custom_view);
+                        toast.show();
+                    }
+                });
+
+
+
+
             }
         });
         //show menu

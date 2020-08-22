@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:shimmer="schemas.android.com/tools"
     android:id="@+id/HomeLayout"
-
+android:background="@color/colorWhite"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment"
     tools:ignore="NamespaceTypo">
@@ -54,7 +54,15 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/homeimg"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                     android:layout_marginEnd="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginRight="1dp"
+                    android:src="@drawable/tea_cup" />
 
             </LinearLayout>
 
@@ -78,7 +86,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="0dp"
-android:visibility="gone"
+android:visibility="visible"
                         android:background="@drawable/gradient_list"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp">
@@ -276,7 +284,7 @@ android:visibility="gone"
 
                         </com.facebook.shimmer.ShimmerFrameLayout>
                         <androidx.recyclerview.widget.RecyclerView
-                            android:background="@color/whitePassive"
+                            android:background="@color/colorWhite"
                             android:id="@+id/postsRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

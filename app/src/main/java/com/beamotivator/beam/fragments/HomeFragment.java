@@ -20,7 +20,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,18 +31,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beamotivator.beam.AboutActivity;
 import com.beamotivator.beam.Attendance;
+import com.beamotivator.beam.DashboardActivity;
 import com.beamotivator.beam.MainActivity;
-import com.beamotivator.beam.MyInfo;
 import com.beamotivator.beam.R;
 import com.beamotivator.beam.SavedPost;
 import com.beamotivator.beam.SuggestionsActivity;
@@ -75,29 +78,28 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class HomeFragment<global> extends Fragment {
+public class HomeFragment extends Fragment {
 
     //firebase auth
     FirebaseAuth firebaseAuth;
 
     RecyclerView recyclerView;
-    RelativeLayout empty;
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
     ShimmerFrameLayout mShimmerViewContainer;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     //init views
     CircleImageView wokImage,menuImage;
-    TextView wokPoints,menuName,wokname, menuEmail,greetName;
+    TextView homeEmpty,wokPoints,menuName,wokname, menuEmail,greetName,homeTitle;
 
-    TextView homeEmpty;
     DrawerLayout homeMenu;
-    ImageView menuIv;
+    ImageView menuIv,homeimg;
     ConstraintLayout wokDisplay;
 
     GoogleSignInClient mGoogleSignInClient;
 
-     CardView wokCard;
+    CardView wokCard;
 
     NavigationView homeNav;
 
@@ -120,7 +122,7 @@ public class HomeFragment<global> extends Fragment {
             Drawable background = getActivity().getResources().getDrawable(R.drawable.main_gradient);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getActivity().getResources().getColor(android.R.color.transparent));
-            //window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
             window.setBackgroundDrawable(background);
 
         }
@@ -129,7 +131,23 @@ public class HomeFragment<global> extends Fragment {
         mShimmerViewContainer = view.findViewById(R.id.postshimmer);
         mShimmerViewContainer.startShimmer();
 
-
+//        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.activity_main_swipe_refresh_layout);
+//
+//        mSwipeRefreshLayout.setColorSchemeResources(R.color.greentheme, R.color.gray, R.color.bluetheme);
+//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        loadPosts();
+//                        mSwipeRefreshLayout.setRefreshing(false);
+//                    }
+//
+//
+//                }, 2500);
+//            }
+//        });
         ConstraintLayout constraintLayout = view.findViewById(R.id.greet_layout);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
@@ -146,13 +164,16 @@ public class HomeFragment<global> extends Fragment {
         wokCard = view.findViewById(R.id.wokCard);
         wokCard.setVisibility(View.GONE);
 
-        empty = view.findViewById(R.id.emptyLayout);
         wokImage = view.findViewById(R.id.wokImage);
         wokPoints = view.findViewById(R.id.wokPoints);
         wokname=view.findViewById(R.id.wokName);
         greetName=view.findViewById(R.id.home_username_greet);
         homeEmpty = view.findViewById(R.id.homeMessage);
+        homeimg = view.findViewById(R.id.homeimg);
+        homeTitle = view.findViewById(R.id.homeTitle);
 
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale);
+        homeTitle.startAnimation(animation);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -211,8 +232,20 @@ public class HomeFragment<global> extends Fragment {
                         catch (Exception e) {
                             menuImage.setImageResource(R.drawable.ic_image);
 
-                            }
+                            Toast.makeText(getActivity(), "" + mName, Toast.LENGTH_SHORT).show();
+                        }
+                        try{
+                            Glide.with(container)
+                                    .load(mImage)
+                                    .centerCrop()
+                                    .placeholder(R.drawable.ic_image)
+                                    .into(homeimg);
+                        }
+                        catch (Exception e) {
+                            homeimg.setImageResource(R.drawable.ic_image);
 
+                            Toast.makeText(getActivity(), "" + mName, Toast.LENGTH_SHORT).show();
+                        }
                     }
 
 
@@ -272,7 +305,7 @@ public class HomeFragment<global> extends Fragment {
                     break;
 
                 case R.id.personalInfo:
-                    Intent prof = new Intent(getActivity(), MyInfo.class);
+                    Intent prof = new Intent(getActivity(), ThierProfile.class);
                     prof.putExtra("uid",myUid);
                     startActivity(prof);
                     break;
@@ -322,7 +355,7 @@ public class HomeFragment<global> extends Fragment {
 
 
     private void loadPosts() {
-        int len = 0;
+
         //linear layout for recyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
@@ -335,64 +368,36 @@ public class HomeFragment<global> extends Fragment {
 
         //path of all posts
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
-        final DatabaseReference gRef = FirebaseDatabase.getInstance().getReference("Groups");
 
+        Query query = ref.getRef();
         //get all data from this ref
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postList.clear();
-                for(DataSnapshot ds:dataSnapshot.getChildren())
+
+                for(DataSnapshot ds:dataSnapshot.getChildren()){
+                    ModelPost modelPost = ds.getValue(ModelPost.class);
+                    postList.add(modelPost);
+
+                    //adapter posts
+                    adapterPosts = new AdapterPosts(getActivity(),postList);
+
+                    //set adapter to recyclerview
+                    recyclerView.setAdapter(adapterPosts);
+                }
+                if(postList.size() == 0)
                 {
-                    final ModelPost modelPost = ds.getValue(ModelPost.class);
-                    final String group = Objects.requireNonNull(modelPost).getGroup();
-
-                    gRef.child(group).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
-                         if(snapshot.child("Participants").hasChild(myUid))
-                                {
-                                    postList.add(modelPost);
-
-                                    //adapter posts
-                                    adapterPosts = new AdapterPosts(getActivity(),postList);
-
-                                    //set adapter to recyclerview
-                                    recyclerView.setAdapter(adapterPosts);
-                                }
-
-                             if(postList.size() == 0)
-                            {
-                                empty.setVisibility(View.VISIBLE);
-                                recyclerView.setVisibility(View.GONE);
-                                homeEmpty.setVisibility(View.VISIBLE);
-                            }
-                            else {
-                                empty.setVisibility(View.GONE);
-                                recyclerView.setVisibility(View.VISIBLE);
-                                homeEmpty.setVisibility(View.GONE);
-                            }
-                            mShimmerViewContainer.stopShimmer();
-
-                        }
-
-
-
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
+                    recyclerView.setVisibility(View.GONE);
+                    homeEmpty.setVisibility(View.VISIBLE);
 
                 }
-
-
-
-
+                else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    homeEmpty.setVisibility(View.GONE);
+                    mShimmerViewContainer.stopShimmer();
+                    mShimmerViewContainer.setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override

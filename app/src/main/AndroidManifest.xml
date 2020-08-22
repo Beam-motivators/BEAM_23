@@ -32,9 +32,10 @@
         <activity android:name=".No_Internet.Internet_off" />
         <activity android:name=".ThierProfile" />
         <activity android:name=".TodoMain" />
+        <activity android:name=".DashboardActivity"/>
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".DashboardActivity"
+            android:name=".Splash"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
