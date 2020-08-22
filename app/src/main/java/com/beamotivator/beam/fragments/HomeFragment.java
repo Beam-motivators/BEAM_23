@@ -122,7 +122,7 @@ public class HomeFragment extends Fragment {
             Drawable background = getActivity().getResources().getDrawable(R.drawable.main_gradient);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getActivity().getResources().getColor(android.R.color.transparent));
-            window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
+            //window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
             window.setBackgroundDrawable(background);
 
         }
@@ -232,7 +232,6 @@ public class HomeFragment extends Fragment {
                         catch (Exception e) {
                             menuImage.setImageResource(R.drawable.ic_image);
 
-                            Toast.makeText(getActivity(), "" + mName, Toast.LENGTH_SHORT).show();
                         }
                         try{
                             Glide.with(container)
@@ -244,8 +243,7 @@ public class HomeFragment extends Fragment {
                         catch (Exception e) {
                             homeimg.setImageResource(R.drawable.ic_image);
 
-                            Toast.makeText(getActivity(), "" + mName, Toast.LENGTH_SHORT).show();
-                        }
+                           }
                     }
 
 

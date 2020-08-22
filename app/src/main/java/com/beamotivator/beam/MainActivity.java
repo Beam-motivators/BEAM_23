@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
                                 //put data within hashmap in database
                                 reference.child(uid).setValue(hashMap);
 
-                                Toast.makeText(MainActivity.this, "" + user.getEmail(), Toast.LENGTH_SHORT).show();
                                 //goto profile activity after logging in
                                 startActivity(new Intent(MainActivity.this, DashboardActivity.class));
                                 finish();

@@ -324,9 +324,6 @@ public class ThierProfile2 extends AppCompatActivity {
                 case 0:
                     return new FragmentMy_Post();
 
-
-
-
             }
             return null;
         }

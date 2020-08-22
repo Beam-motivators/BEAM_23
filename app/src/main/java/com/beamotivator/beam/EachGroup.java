@@ -80,7 +80,6 @@ public class EachGroup extends AppCompatActivity {
 
         getSupportActionBar().setTitle(groupName);
 
-        Toast.makeText(this, ""+groupName, Toast.LENGTH_SHORT).show();
 
 
         followRef = FirebaseDatabase.getInstance().getReference("Groups");
