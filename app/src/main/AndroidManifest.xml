@@ -32,6 +32,7 @@
         <activity android:name=".No_Internet.Internet_off" />
         <activity android:name=".ThierProfile" />
         <activity android:name=".TodoMain" />
+        <activity android:name=".ThierProfile2"/>
         <activity android:name=".DashboardActivity"/>
         <activity android:name=".MainActivity" />
         <activity

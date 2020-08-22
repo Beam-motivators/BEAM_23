@@ -34,6 +34,7 @@ import com.beamotivator.beam.PostDetailActivity;
 import com.beamotivator.beam.PostLikedByActivity;
 import com.beamotivator.beam.R;
 import com.beamotivator.beam.ThierProfile;
+import com.beamotivator.beam.ThierProfile2;
 import com.beamotivator.beam.Variables;
 import com.beamotivator.beam.models.ModelPost;
 import com.beamotivator.beam.models.ModelUser;
@@ -51,6 +52,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -124,6 +126,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         String pTimeStamp = postList.get(i).getpTime();
         String pComments = postList.get(i).getpComments(); //total number of comments for a post
         String timestamp = postList.get(i).getStamp();
+        final String email = postList.get(i).getuEmail();
 
         //to convert it date time
         String dateTime = null;
@@ -431,11 +434,32 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         myHolder.profileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+               FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+if(user.getEmail().equals(email)){
+
+
+    Intent intent = new Intent(context, ThierProfile.class);
+    intent.putExtra("uid",uid);
+    context.startActivity(intent);
+
+
+}
+else {
+
+
+
+    Intent intent = new Intent(context, ThierProfile2.class);
+    intent.putExtra("uid",uid);
+    context.startActivity(intent);
+   // Toast.makeText(context, "no entry", Toast.LENGTH_SHORT).show();
+}
+
                 //click to go to TheirProfile with the uid, uid of clicked user
                 //which will be used to show user specific data/posts
-                Intent intent = new Intent(context, ThierProfile.class);
-                intent.putExtra("uid",uid);
-                context.startActivity(intent);
+
             }
         });
 

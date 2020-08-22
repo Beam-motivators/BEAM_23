@@ -1,32 +1,25 @@
 package com.beamotivator.beam;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.beamotivator.beam.adapters.AdapterPosts;
 import com.beamotivator.beam.fragments.FragmentMy_Post;
@@ -37,7 +30,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -47,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ThierProfile extends AppCompatActivity {
+public class ThierProfile2 extends AppCompatActivity {
 
     FirebaseAuth  firebaseAuth;
 
@@ -74,7 +66,7 @@ public class ThierProfile extends AppCompatActivity {
             window.setBackgroundDrawable(background);
 
         }
-        setContentView(R.layout.activity_their_profile);
+        setContentView(R.layout.activity_their_profile2);
         avatarIv = findViewById(R.id.avatarIv);
 
         Toolbar profileTlbr = findViewById(R.id.profileToolbar);
@@ -309,7 +301,7 @@ public class ThierProfile extends AppCompatActivity {
         }
         if(id == R.id.add_post)
         {
-            startActivity(new Intent(ThierProfile.this,AboutActivity.class));
+            startActivity(new Intent(ThierProfile2.this,AboutActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -331,8 +323,6 @@ public class ThierProfile extends AppCompatActivity {
                 // replace with different fragments
                 case 0:
                     return new FragmentMy_Post();
-                case 1:
-                    return new FragmentSaved_post();
 
 
 
@@ -343,7 +333,7 @@ public class ThierProfile extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
     }
 
