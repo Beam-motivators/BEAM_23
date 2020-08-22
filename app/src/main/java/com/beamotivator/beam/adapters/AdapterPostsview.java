@@ -36,6 +36,7 @@ import com.beamotivator.beam.R;
 import com.beamotivator.beam.ThierProfile;
 import com.beamotivator.beam.ThierProfile2;
 import com.beamotivator.beam.Variables;
+import com.beamotivator.beam.View_Poast;
 import com.beamotivator.beam.models.ModelPost;
 import com.bumptech.glide.Glide;
 import com.downloader.Error;
@@ -142,7 +143,26 @@ public class AdapterPostsview extends RecyclerView.Adapter<AdapterPostsview.MyHo
 
 
 
+        myHolder.image_furniture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+
+
+                    Intent intent = new Intent(context, View_Poast.class);
+                    intent.putExtra("uid",uid);
+                    SharedPreferences sh=context.getSharedPreferences("posts",MODE_PRIVATE);
+                    SharedPreferences.Editor ee=sh.edit();
+                    ee.putString("uid",uid);
+                    ee.apply();
+
+                    context.startActivity(intent);
+
+
+
+            }
+        });
 
     }
 
@@ -186,7 +206,7 @@ public class AdapterPostsview extends RecyclerView.Adapter<AdapterPostsview.MyHo
 
 
 
-   
+
 
 
 

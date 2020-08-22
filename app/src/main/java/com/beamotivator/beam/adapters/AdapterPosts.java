@@ -446,8 +446,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
 if(user.getEmail().equals(email)){
 
-    Toast.makeText(context, ""+uid, Toast.LENGTH_SHORT).show();
-    Intent intent = new Intent(context, ThierProfile.class);
+     Intent intent = new Intent(context, ThierProfile.class);
     intent.putExtra("uid",uid);
     context.startActivity(intent);
 

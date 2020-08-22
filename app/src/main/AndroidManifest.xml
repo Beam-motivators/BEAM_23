@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/tea_cup"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyInfo"></activity>
+        <activity android:name=".View_Poast"></activity>
+        <activity android:name=".MyInfo" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".AddModifyTask" />
         <activity android:name=".AddPostActivity" />
@@ -32,8 +33,8 @@
         <activity android:name=".No_Internet.Internet_off" />
         <activity android:name=".ThierProfile" />
         <activity android:name=".TodoMain" />
-        <activity android:name=".ThierProfile2"/>
-        <activity android:name=".DashboardActivity"/>
+        <activity android:name=".ThierProfile2" />
+        <activity android:name=".DashboardActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".Splash"

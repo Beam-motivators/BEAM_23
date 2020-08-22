@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:shimmer="schemas.android.com/tools"
     android:id="@+id/HomeLayout"
-android:background="#ece9e6"
+android:background="@color/colorWhite"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment"
     tools:ignore="NamespaceTypo">
@@ -284,7 +284,7 @@ android:background="#ece9e6"
 
                         </com.facebook.shimmer.ShimmerFrameLayout>
                         <androidx.recyclerview.widget.RecyclerView
-                            android:background="#ece9e6"
+                            android:background="@color/colorWhite"
                             android:id="@+id/postsRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
