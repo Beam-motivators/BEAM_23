@@ -143,8 +143,8 @@ RelativeLayout pImage22;
         cAvatarIv = findViewById(R.id.cAvatarIv);
 
 
-        Animation animation = AnimationUtils.loadAnimation(PostDetailActivity.this, R.anim.scale);
-        shareBtn.startAnimation(animation);
+//        Animation animation = AnimationUtils.loadAnimation(PostDetailActivity.this, R.anim.scale);
+//        shareBtn.startAnimation(animation);
 
         loadPostInfo();
 
