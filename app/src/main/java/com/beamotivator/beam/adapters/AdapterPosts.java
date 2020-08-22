@@ -197,6 +197,8 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         if(pImage.equals("noImage"))
         {
             myHolder.pImageIv.setVisibility(View.GONE);
+            myHolder.progressBar.setVisibility(View.GONE);
+
         }
         else {
 

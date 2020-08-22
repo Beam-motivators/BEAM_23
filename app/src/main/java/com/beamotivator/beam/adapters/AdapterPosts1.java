@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import android.view.Gravity;
@@ -21,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,10 @@ import com.beamotivator.beam.ThierProfile2;
 import com.beamotivator.beam.Variables;
 import com.beamotivator.beam.models.ModelPost;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.downloader.Error;
 import com.downloader.OnCancelListener;
 import com.downloader.OnDownloadListener;
@@ -60,6 +66,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -186,18 +194,54 @@ public class AdapterPosts1 extends RecyclerView.Adapter<AdapterPosts1.MyHolder> 
         if(pImage.equals("noImage"))
         {
             myHolder.pImageIv.setVisibility(View.GONE);
+            myHolder.progressBar.setVisibility(View.GONE);
+
         }
         else {
-            myHolder.pImageIv.setVisibility(View.VISIBLE);
-            try {
-                Glide.with(context)
-                        .load(pImage)
-                        .centerInside()
-                        .into(myHolder.pImageIv);
-            }
-            catch (Exception e) {
-                Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+
+            myHolder.progressBar.setVisibility(View.VISIBLE);
+            Glide.with(context)
+                    .load(pImage)
+//                    .listener(new RequestListener<String, GlideDrawable>() {
+//                        @Override
+//                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+//                            return false;
+//                        }
+//
+//                        @Override
+//                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                            myHolder.progressBar.setVisibility(View.GONE);
+//                            return false;
+//                        }
+//                    })
+//                    .into(myHolder.pImageIv);
+
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            myHolder. progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            myHolder.progressBar.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .into(myHolder.pImageIv);
+
+
+//            myHolder.pImageIv.setVisibility(View.VISIBLE);
+//            try {
+//                Glide.with(context)
+//                        .load(pImage)
+//                        .centerInside()
+//                        .into(myHolder.pImageIv);
+//            }
+//            catch (Exception e) {
+//                Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
         }
         Calendar cal = Calendar.getInstance();
         TimeZone tz = cal.getTimeZone();//get your local time zone.
@@ -942,7 +986,7 @@ else {
         Button likeBtn, commentBtn, saveBtn, shareBtn;
         LinearLayout profileLayout;
         CardView view1;
-
+ProgressBar progressBar;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -965,6 +1009,7 @@ else {
             profileLayout = itemView.findViewById(R.id.profileLayout);
             stamp = itemView.findViewById(R.id.stamp);
             view1 = itemView.findViewById(R.id.postsCard);
+            progressBar = itemView.findViewById(R.id.progress);
 
 
         }
