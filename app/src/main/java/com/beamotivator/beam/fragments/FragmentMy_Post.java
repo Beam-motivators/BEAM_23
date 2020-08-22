@@ -2,6 +2,7 @@ package com.beamotivator.beam.fragments;
 
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,12 +28,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class FragmentMy_Post extends Fragment {
 
     RecyclerView savedPostsRv;
 
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
+    SharedPreferences she,sh;
 
     FirebaseAuth firebaseAuth;
     String myId ;
@@ -50,6 +54,7 @@ public class FragmentMy_Post extends Fragment {
         //set firebase
         firebaseAuth = FirebaseAuth.getInstance();
         myId = firebaseAuth.getCurrentUser().getUid();
+        sh=getActivity(). getSharedPreferences("databasedata",MODE_PRIVATE);
 
 
 
