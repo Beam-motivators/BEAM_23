@@ -162,6 +162,8 @@
                             android:background="@color/colorWhite"
                             android:drawableStart="@drawable/launch_24px"
                             android:paddingStart="30dp"
+                            android:layout_weight="1"
+                            android:text="SHARE"
                             android:paddingEnd="5dp" />
 
                         <!--            <Button-->

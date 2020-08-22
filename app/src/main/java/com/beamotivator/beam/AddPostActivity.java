@@ -592,7 +592,6 @@ public class AddPostActivity extends AppCompatActivity  {
         @Override
         public void onReceive(Context context, Intent intent) {
             bGroupName = intent.getStringExtra("groupName");
-            Toast.makeText(context, ""+bGroupName, Toast.LENGTH_SHORT).show();
             inputChoice.setText(bGroupName);
             groupNamesRv.setVisibility(View.INVISIBLE);
         }

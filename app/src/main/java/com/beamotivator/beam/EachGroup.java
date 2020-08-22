@@ -19,7 +19,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.beamotivator.beam.adapters.AdapterMyGroups;
 import com.beamotivator.beam.adapters.AdapterPosts;
+import com.beamotivator.beam.models.ModelMyGroups;
 import com.beamotivator.beam.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,9 +42,11 @@ public class EachGroup extends AppCompatActivity {
 
     //Adapter
     AdapterPosts adapterPosts;
+    AdapterMyGroups adapterMyGroups;
     List<ModelPost> postList;
     String groupName = null;
     String gId = null;
+    List<ModelMyGroups> groupsList;
 
     Button follow;
     DatabaseReference followRef;
@@ -80,7 +84,6 @@ public class EachGroup extends AppCompatActivity {
 
         getSupportActionBar().setTitle(groupName);
 
-        Toast.makeText(this, ""+groupName, Toast.LENGTH_SHORT).show();
 
 
         followRef = FirebaseDatabase.getInstance().getReference("Groups");
@@ -90,6 +93,7 @@ public class EachGroup extends AppCompatActivity {
 
         groupPosts = findViewById(R.id.groupPostsRv);
         follow = findViewById(R.id.followBtn);
+
 
         follow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,25 +143,7 @@ public class EachGroup extends AppCompatActivity {
     }
 
     private void followGroup() {
-//        follow.setText("Following");
-//
-//        DatabaseReference followRef = FirebaseDatabase.getInstance().getReference("Groups");
-//
-//        Query query = followRef.orderByChild("groupTitle").equalTo(groupName);
-//
-//        query.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                String mUid = user.getUid();
-//                followRef.getRef().child(gId).child("Participants").child(mUid).setValue("Following");
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+
         mFollow = true;
 
         followRef.addValueEventListener(new ValueEventListener() {

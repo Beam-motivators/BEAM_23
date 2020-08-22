@@ -328,9 +328,6 @@ SharedPreferences sh;
                 case 0:
                     return new FragmentMy_Post();
 
-
-
-
             }
             return null;
         }

@@ -8,6 +8,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +37,7 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
     Context context;
     List<ModelComment> commentList;
     String myUid, postId;
-
-    private ProgressDialog pd;
+    ProgressDialog pd;
 
 
     public AdapterComments(Context context, List<ModelComment> commentList, String myUid, String postId) {
@@ -45,7 +45,7 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
         this.commentList = commentList;
         this.myUid = myUid;
         this.postId = postId;
-        ProgressDialog pd = new ProgressDialog(context);
+        pd = new ProgressDialog(context);
     }
 
     @NonNull
@@ -112,6 +112,7 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
                         public void onClick(DialogInterface dialog, int which) {
                             //delete comment
                             deleteComment(cid);
+                            dialog.dismiss();
                         }
                     });
                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -134,10 +135,28 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
 
     private void deleteComment(String cid) {
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(postId);
-        pd.setMessage("Deleting the comment");
-        pd.show();
+//        pd.setMessage("Deleting the comment");
+       // final ProgressDialog pd = new ProgressDialog(context);
+//        pd.setMessage("Deleting the comment");
+//        pd.show();
 
-        ref.child("Comments").child(cid).removeValue();
+        ref.child("Comments")
+                .child(cid)
+                .removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(context, "Comment deleted", Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Comment deleted", Toast.LENGTH_SHORT).show();
+                   }
+                });
 
         //now update the comments count
         ref.addListenerForSingleValueEvent(new ValueEventListener() {

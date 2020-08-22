@@ -37,6 +37,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,6 +84,7 @@ public class HomeFragment extends Fragment {
     //firebase auth
     FirebaseAuth firebaseAuth;
 
+    RelativeLayout empty;
     RecyclerView recyclerView;
     List<ModelPost> postList;
     AdapterPosts adapterPosts;
@@ -122,7 +124,7 @@ public class HomeFragment extends Fragment {
             Drawable background = getActivity().getResources().getDrawable(R.drawable.main_gradient);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getActivity().getResources().getColor(android.R.color.transparent));
-            window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
+            //window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
             window.setBackgroundDrawable(background);
 
         }
@@ -148,11 +150,11 @@ public class HomeFragment extends Fragment {
 //                }, 2500);
 //            }
 //        });
-        ConstraintLayout constraintLayout = view.findViewById(R.id.greet_layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(2000);
-        animationDrawable.setExitFadeDuration(2000);
-        animationDrawable.start();
+//        ConstraintLayout constraintLayout = view.findViewById(R.id.greet_layout);
+//        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+//        animationDrawable.setEnterFadeDuration(2000);
+//        animationDrawable.setExitFadeDuration(2000);
+//        animationDrawable.start();
         firebaseAuth = FirebaseAuth.getInstance();
         myUid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
 
@@ -164,10 +166,11 @@ public class HomeFragment extends Fragment {
         wokCard = view.findViewById(R.id.wokCard);
         wokCard.setVisibility(View.GONE);
 
+        empty = view.findViewById(R.id.emptyLayout);
         wokImage = view.findViewById(R.id.wokImage);
         wokPoints = view.findViewById(R.id.wokPoints);
         wokname=view.findViewById(R.id.wokName);
-        greetName=view.findViewById(R.id.home_username_greet);
+        //greetName=view.findViewById(R.id.home_username_greet);
         homeEmpty = view.findViewById(R.id.homeMessage);
         homeimg = view.findViewById(R.id.homeimg);
         homeTitle = view.findViewById(R.id.homeTitle);
@@ -219,33 +222,27 @@ public class HomeFragment extends Fragment {
                         String mImage = ""+snapshot.child("image").getValue();
                         String email = ""+snapshot.child("email").getValue();
                         menuName.setText(mName);
-                        greetName.setText(mName);
+//                        greetName.setText(mName);
                         menuEmail.setText(email);
 
                         try{
                             Glide.with(container)
                                     .load(mImage)
                                     .centerCrop()
-                                    .placeholder(R.drawable.ic_image)
                                     .into(menuImage);
                         }
-                        catch (Exception e) {
-                            menuImage.setImageResource(R.drawable.ic_image);
+                        catch (Exception ignored) {
 
-                            Toast.makeText(getActivity(), "" + mName, Toast.LENGTH_SHORT).show();
                         }
                         try{
                             Glide.with(container)
                                     .load(mImage)
                                     .centerCrop()
-                                    .placeholder(R.drawable.ic_image)
                                     .into(homeimg);
                         }
                         catch (Exception e) {
-                            homeimg.setImageResource(R.drawable.ic_image);
 
-                            Toast.makeText(getActivity(), "" + mName, Toast.LENGTH_SHORT).show();
-                        }
+                           }
                     }
 
 
@@ -354,7 +351,7 @@ public class HomeFragment extends Fragment {
 
 
 
-    private void loadPosts() {
+   /* private void loadPosts() {
 
         //linear layout for recyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -405,8 +402,88 @@ public class HomeFragment extends Fragment {
                 //in case of error
             }
         });
-    }
+    }*/
 
+    private void loadPosts() {
+        int len = 0;
+        //linear layout for recyclerview
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+        //show newest posts, load from last
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+
+        //set this layout to recycler view
+        recyclerView.setLayoutManager(layoutManager);
+
+        //path of all posts
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+        final DatabaseReference gRef = FirebaseDatabase.getInstance().getReference("Groups");
+
+        //get all data from this ref
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                postList.clear();
+                for(DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    final ModelPost modelPost = ds.getValue(ModelPost.class);
+                    final String group = Objects.requireNonNull(modelPost).getGroup();
+
+                    gRef.child(group).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                            if(snapshot.child("Participants").hasChild(myUid))
+                            {
+                                postList.add(modelPost);
+
+                                //adapter posts
+                                adapterPosts = new AdapterPosts(getActivity(),postList);
+
+                                //set adapter to recyclerview
+                                recyclerView.setAdapter(adapterPosts);
+                            }
+
+                            if(postList.size() == 0)
+                            {
+                                empty.setVisibility(View.VISIBLE);
+                                recyclerView.setVisibility(View.GONE);
+                                homeEmpty.setVisibility(View.VISIBLE);
+                            }
+                            else {
+                                empty.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
+                                homeEmpty.setVisibility(View.GONE);
+                            }
+                            mShimmerViewContainer.stopShimmer();
+
+                        }
+
+
+
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //in case of error
+            }
+        });
+    }
 
 
     @Override

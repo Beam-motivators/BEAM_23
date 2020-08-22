@@ -91,6 +91,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     CircleImageView bottomProfileImage;
     TextView bottomSheetName;
 
+    private static final int WRITE_REQUEST_CODE = 100;
     String myUid;
 
     private  DatabaseReference likesRef; //for likes database node
@@ -445,7 +446,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
 if(user.getEmail().equals(email)){
 
-
+    Toast.makeText(context, ""+uid, Toast.LENGTH_SHORT).show();
     Intent intent = new Intent(context, ThierProfile.class);
     intent.putExtra("uid",uid);
     context.startActivity(intent);
@@ -572,9 +573,6 @@ else {
         hashMap.put("pUid",hisUid);
         hashMap.put("notification",notification);
         hashMap.put("sUid",myUid);
-        hashMap.put("sName",pId);
-        hashMap.put("sEmail",pId);
-        hashMap.put("sImage",pId);
         hashMap.put("nId",timestamp+name);
 
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference("Extras");
@@ -703,7 +701,7 @@ else {
         });
     }
 
-    private void showMoreOptions(ImageButton moreBtn, String uid, final String myUid, final String pId, final String pImage) {
+    private void showMoreOptions(ImageButton moreBtn, final String uid, final String myUid, final String pId, final String pImage) {
         //creating pop up menu when moe button clicked
         final PopupMenu popupMenu = new PopupMenu(context, moreBtn, Gravity.END);
         //show delete option in posts of only currently signed in user
@@ -717,7 +715,7 @@ else {
         adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.hasChild(myUid)){
+                if((snapshot.hasChild(myUid))||(!uid.equals(myUid))){
                     popupMenu.getMenu().add(Menu.NONE, 0,0 , "Delete");
                 }
             }
@@ -751,19 +749,20 @@ else {
                 else if(id == 3)
                 {
                     //start post detail activity
-startDownload();                }
+                    startDownload();
+                }
                 return false;
             }
 
             private void startDownload() {
                 final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppCompatAlertDialogStyle);
-                progressDialog.setMessage("Saving");
+                progressDialog.setMessage("Downloading");
                   progressDialog.setCancelable(false);
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 progressDialog.setProgress(0);
 
 //              progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
-         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+              progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
               progressDialog.show();
                 PRDownloader.initialize(context);
                 DownloadRequest prDownloader= PRDownloader.download(pImage, Variables.app_showing_folder, pImage+".jpg")
@@ -906,10 +905,24 @@ startDownload();                }
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
-                    ds.getRef().removeValue(); //removes values from firebase where pid matches
+                    ds.getRef()
+                            .removeValue()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                     //removes values from firebase where pid matches
                 }
                 //deleted
-                Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
 
             }
 

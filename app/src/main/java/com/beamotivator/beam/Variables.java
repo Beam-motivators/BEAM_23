@@ -18,7 +18,7 @@ public class Variables {
 
     public static final String root= Environment.getExternalStorageDirectory().toString();
     public static final String app_hided_folder =root+"/.Beam/";
-    public static final String app_showing_folder =root+"/Beam/";
+    public static final String app_showing_folder =root +"/.Beam/";
 
 
 
