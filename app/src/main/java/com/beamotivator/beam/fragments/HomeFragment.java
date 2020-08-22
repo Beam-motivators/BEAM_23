@@ -130,8 +130,8 @@ public class HomeFragment extends Fragment {
         }
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
 
-        mShimmerViewContainer = view.findViewById(R.id.postshimmer);
-        mShimmerViewContainer.startShimmer();
+//        mShimmerViewContainer = view.findViewById(R.id.postshimmer);
+//        mShimmerViewContainer.startShimmer();
 
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.activity_main_swipe_refresh_layout);
 //
@@ -457,7 +457,7 @@ public class HomeFragment extends Fragment {
                                 recyclerView.setVisibility(View.VISIBLE);
                                 homeEmpty.setVisibility(View.GONE);
                             }
-                            mShimmerViewContainer.stopShimmer();
+                         //   mShimmerViewContainer.stopShimmer();
 
                         }
 

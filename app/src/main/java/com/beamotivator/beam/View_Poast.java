@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.beamotivator.beam.adapters.AdapterPosts;
+import com.beamotivator.beam.adapters.AdapterPosts1;
 import com.beamotivator.beam.adapters.AdapterPostsview;
 import com.beamotivator.beam.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +30,7 @@ public class View_Poast extends AppCompatActivity {
     RecyclerView savedPostsRv;
 
     List<ModelPost> postList;
-    AdapterPosts adapterPosts;
+    AdapterPosts1 adapterPosts;
 
     FirebaseAuth firebaseAuth;
     String myId ;
@@ -110,7 +111,7 @@ public class View_Poast extends AppCompatActivity {
 
 
                     //adapter
-                    adapterPosts = new AdapterPosts(getApplicationContext(),postList);
+                    adapterPosts = new AdapterPosts1(getApplicationContext(),postList);
 
                     //set adapter to recycler view
                     savedPostsRv.setAdapter(adapterPosts);
