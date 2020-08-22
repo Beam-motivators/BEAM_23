@@ -59,7 +59,6 @@ public class AdapterMyGroups extends RecyclerView.Adapter<AdapterMyGroups.GroupH
         try {
             Glide.with(context)
                     .load(gImage)
-                    .placeholder(R.drawable.ic_image_black)
                     .into(holder.groupImage);
         }
         catch (Exception e){

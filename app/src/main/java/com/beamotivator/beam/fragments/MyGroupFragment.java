@@ -147,6 +147,10 @@ public class MyGroupFragment extends Fragment {
                         groupEmpty.setVisibility(View.VISIBLE);
 
                     }
+                    else{
+                        groupsRv.setVisibility(View.VISIBLE);
+                        groupEmpty.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
@@ -157,4 +161,9 @@ public class MyGroupFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        loadMyGroups();
+        super.onResume();
+    }
 }

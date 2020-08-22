@@ -319,6 +319,7 @@ public class    DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+        onBackPressed();
         return super.onSupportNavigateUp();
     }
 
@@ -360,6 +361,27 @@ public class    DashboardActivity extends AppCompatActivity {
         prefManager.setFirstTimeLaunch(false);
         Toast.makeText(this, "ho", Toast.LENGTH_SHORT).show();
          finish();
+    }
+
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 }

@@ -2,10 +2,12 @@ package com.beamotivator.beam.fragments;
 
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -27,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class FragmentMy_Post extends Fragment {
 
     RecyclerView savedPostsRv;
@@ -38,6 +42,7 @@ public class FragmentMy_Post extends Fragment {
     String myId ;
     String ig = "";
     int count  = 0;
+    SharedPreferences sh;
     public FragmentMy_Post() {
     }
 
@@ -45,15 +50,16 @@ public class FragmentMy_Post extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_my_post, container, false);
 
         //set firebase
         firebaseAuth = FirebaseAuth.getInstance();
         myId = firebaseAuth.getCurrentUser().getUid();
 
+        sh= getActivity().getSharedPreferences("posts",MODE_PRIVATE);
 
 
-        ;
 
         savedPostsRv =root. findViewById(R.id.myposts);
 
@@ -63,7 +69,7 @@ public class FragmentMy_Post extends Fragment {
 //
 
 
-return  root;
+        return  root;
     }
 
     private void loadSavedPosts() {
@@ -81,53 +87,43 @@ return  root;
         myId = firebaseAuth.getCurrentUser().getUid();
 
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Extras").child(myId).child("Saved");
-        ref.addValueEventListener(new ValueEventListener() {
+
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(pI).child("Saved");
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                postList.clear();
+//                for(DataSnapshot ds:snapshot.getChildren()){
+//
+//                    String postId = ""+ds.getKey();
+
+        //now check for the post details
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Posts");
+        ref1.orderByChild("uid").equalTo(sh.getString("uid",null)).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                postList.clear();
-                for(DataSnapshot ds:snapshot.getChildren()){
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
 
-                    String postId = ""+ds.getKey();
-
-                    //now check for the post details
-                    DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Posts");
-                    ref1.orderByChild("pId")
-                            .equalTo(postId)
-                            .addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-
-                                    for(DataSnapshot ds1:datasnapshot.getChildren()){
+                for(DataSnapshot ds1:datasnapshot.getChildren()){
 
 
-                                        ModelPost modelPost = ds1.getValue(ModelPost.class);
+                    ModelPost modelPost = ds1.getValue(ModelPost.class);
 
 
-                                        //add post
-                                        postList.add(modelPost);
+                    //add post
+                    postList.add(modelPost);
 
 
 
-                                        //adapter
-                                        adapterPosts = new AdapterPosts(getActivity(),postList);
+                    //adapter
+                    adapterPosts = new AdapterPosts(getActivity(),postList);
 
-                                        //set adapter to recycler view
-                                        savedPostsRv.setAdapter(adapterPosts);
-                                    }
-
-
-
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-
+                    //set adapter to recycler view
+                    savedPostsRv.setAdapter(adapterPosts);
                 }
+
+
+
+
             }
 
             @Override
@@ -137,7 +133,4 @@ return  root;
         });
 
     }
-
-
-
 }

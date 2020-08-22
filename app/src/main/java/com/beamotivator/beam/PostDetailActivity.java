@@ -186,7 +186,7 @@ RelativeLayout pImage22;
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pTitle =pTitleTv.getText().toString().trim();
+//                String pTitle =pTitleTv.getText().toString().trim();
                 String pDescription = pDescriptionTv.getText().toString().trim();
 
                 //some posts contain only text and some contain images so we have to handle them both
@@ -195,7 +195,7 @@ RelativeLayout pImage22;
                 if(bitmapDrawable == null)
                 {
                     //post without image
-                    shareTextOnly(pTitle,pDescription);
+                    shareTextOnly(pDescription);
                 }
                 else
                 {
@@ -203,7 +203,7 @@ RelativeLayout pImage22;
 
                     //convert image to bitmap
                     Bitmap bitmap = bitmapDrawable.getBitmap();
-                    shareImageAndText(pTitle,pDescription,bitmap);
+                    shareImageAndText(pDescription,bitmap);
 
 
 
@@ -257,22 +257,20 @@ RelativeLayout pImage22;
 
     }
 
-    private void shareTextOnly(String pTitle, String pDescription) {
+    private void shareTextOnly(String pDescription) {
         //concatenate title and description to share
-        String shareBody = pTitle +"\n" + pDescription;
 
         //share Intent
         Intent sIntent = new Intent(Intent.ACTION_SEND);
         sIntent.setType("text/plain");
         sIntent.putExtra(Intent.EXTRA_SUBJECT,"Subject Here"); //in case you share via email app
-        sIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+        sIntent.putExtra(Intent.EXTRA_TEXT, pDescription);
         startActivity(Intent.createChooser(sIntent,"Share Via"));  //message to show in shared dialog
 
     }
 
-    private void shareImageAndText(String pTitle, String pDescription, Bitmap bitmap) {
+    private void shareImageAndText(String pDescription, Bitmap bitmap) {
         //concatenate title and description to share
-        String shareBody = pTitle +"\n" + pDescription;
 
         //first we will save the image in cache, get the saved image uri
         Uri uri = saveImageToShare(bitmap);
@@ -280,7 +278,7 @@ RelativeLayout pImage22;
         //share intent
         Intent sIntent = new Intent(Intent.ACTION_SEND);
         sIntent.putExtra(Intent.EXTRA_STREAM,uri);
-        sIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+        sIntent.putExtra(Intent.EXTRA_TEXT, pDescription);
         sIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here");
         sIntent.setType("image/png");
         startActivity(Intent.createChooser(sIntent, "Share Via"));
@@ -477,11 +475,11 @@ RelativeLayout pImage22;
                     /*to indicate user has liked this post
                      * change the icon to another
                      * change text like to liked */
-                    likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_liked, 0, 0, 0);
+                    likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.thumb_up_24px_fill, 0, 0, 0);
                     likeBtn.setText("Liked");
                 } else {
                     //user not liked this post
-                    likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like, 0, 0, 0);
+                    likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.thumb_up_24px, 0, 0, 0);
                     likeBtn.setText("Like");
                 }
             }
