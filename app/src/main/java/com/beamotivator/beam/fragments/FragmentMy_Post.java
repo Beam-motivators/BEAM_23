@@ -60,7 +60,7 @@ public class FragmentMy_Post extends Fragment {
         postList = new ArrayList<>();
 
         loadSavedPosts();
-
+//
 
 
 return  root;
