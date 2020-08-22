@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 
 import com.beamotivator.beam.adapters.AdapterPosts;
 import com.beamotivator.beam.fragments.FragmentMy_Post;
+import com.beamotivator.beam.fragments.FragmentMy_Post_user;
 import com.beamotivator.beam.fragments.FragmentSaved_post;
 import com.beamotivator.beam.models.ModelPost;
 import com.bumptech.glide.Glide;
@@ -61,7 +63,7 @@ public class ThierProfile extends AppCompatActivity {
     ImageView avatarIv, coverIv;
     TextView nameTv, emailTv ;
     private SectionsPagerAdapter sectionsPagerAdapter;
-
+SharedPreferences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +78,7 @@ public class ThierProfile extends AppCompatActivity {
         }
         setContentView(R.layout.activity_their_profile);
         avatarIv = findViewById(R.id.avatarIv);
+        sh= getSharedPreferences("posts",MODE_PRIVATE);
 
         Toolbar profileTlbr = findViewById(R.id.profileToolbar);
         tabLayout = findViewById(R.id.news_tab);
@@ -330,7 +333,7 @@ public class ThierProfile extends AppCompatActivity {
             switch (position) {
                 // replace with different fragments
                 case 0:
-                    return new FragmentMy_Post();
+                    return new FragmentMy_Post_user();
                 case 1:
                     return new FragmentSaved_post();
 
@@ -345,6 +348,13 @@ public class ThierProfile extends AppCompatActivity {
         public int getCount() {
             return 2;
         }
+    }
+    public void onBackPressed() {
+
+        SharedPreferences.Editor e = sh.edit();
+        e.clear();
+        e.apply();
+        finish();
     }
 
 }

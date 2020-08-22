@@ -81,20 +81,19 @@ return  root;
         myId = firebaseAuth.getCurrentUser().getUid();
 
 
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Extras").child(myId).child("Saved");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postList.clear();
+                for(DataSnapshot ds:snapshot.getChildren()){
 
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts").child(pI).child("Saved");
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                postList.clear();
-//                for(DataSnapshot ds:snapshot.getChildren()){
-//
-//                    String postId = ""+ds.getKey();
+                    String postId = ""+ds.getKey();
 
                     //now check for the post details
                     DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Posts");
-                    ref1.orderByChild("uid")
-                            .equalTo(myId)
+                    ref1.orderByChild("pId")
+                            .equalTo(postId)
                             .addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot datasnapshot) {
@@ -131,6 +130,14 @@ return  root;
                 }
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
 
 
 
+}

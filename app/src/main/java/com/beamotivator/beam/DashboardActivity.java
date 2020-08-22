@@ -96,6 +96,7 @@ public class    DashboardActivity extends AppCompatActivity {
     Intent intentPostType = null;
 
     Uri image_rui = null;
+    private PrefManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +107,11 @@ public class    DashboardActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_dashboard);
 
+        prefManager = new PrefManager(this);
+        if (!prefManager.isFirstTimeLaunch()) {
+            launchHomeScreen();
+            finish();
+        }
 
         ConnectivityManager cm=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -350,6 +356,10 @@ public class    DashboardActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
     }
-
+    private void launchHomeScreen() {
+        prefManager.setFirstTimeLaunch(false);
+        Toast.makeText(this, "ho", Toast.LENGTH_SHORT).show();
+         finish();
+    }
 
 }
