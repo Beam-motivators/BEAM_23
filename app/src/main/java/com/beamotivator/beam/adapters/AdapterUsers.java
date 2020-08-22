@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beamotivator.beam.R;
 import com.beamotivator.beam.ThierProfile;
+import com.beamotivator.beam.ThierProfile2;
 import com.beamotivator.beam.models.ModelUser;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +35,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
 
@@ -69,6 +74,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         String userName = userList.get(i).getName();
         final String userEmail = userList.get(i).getEmail();
         final String uid = userList.get(i).getUid();
+        final String email = userList.get(i).getEmail();
 
         //set data
         myHolder.mNameTV.setText(userName);
@@ -88,17 +94,32 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*click user from user list to start texting or messaging
-                * start activity by putting uid of the reciever
-                * we will use that UID to identify the user we are gonna chat*/
 
-                //Toast.makeText(context, "You clicked", Toast.LENGTH_SHORT).show();
-                //to go to the respective user during with his uid
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                            Intent prof = new Intent(context, ThierProfile.class);
-                            prof.putExtra("uid",uid);
-                            context.startActivity(prof);
+                if(user.getEmail().equals(email)){
 
+
+                    Intent intent = new Intent(context, ThierProfile.class);
+                    intent.putExtra("uid",uid);
+                    context.startActivity(intent);
+
+
+                }
+                else {
+
+
+                    Intent intent = new Intent(context, ThierProfile2.class);
+                    intent.putExtra("uid", uid);
+                    SharedPreferences sh = context.getSharedPreferences("posts", MODE_PRIVATE);
+                    SharedPreferences.Editor ee = sh.edit();
+                    ee.putString("uid", uid);
+                    ee.apply();
+
+                    context.startActivity(intent);
+
+                    // Toast.makeText(co
+                }
             }
         });
 
