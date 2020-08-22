@@ -42,6 +42,7 @@ import com.downloader.Error;
 import com.downloader.OnCancelListener;
 import com.downloader.OnDownloadListener;
 import com.downloader.OnPauseListener;
+import com.downloader.OnProgressListener;
 import com.downloader.OnStartOrResumeListener;
 import com.downloader.PRDownloader;
 import com.downloader.Progress;
@@ -57,7 +58,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
@@ -724,6 +724,9 @@ startDownload();                }
                 final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppCompatAlertDialogStyle);
                 progressDialog.setMessage("Saving");
                   progressDialog.setCancelable(false);
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressDialog.setProgress(0);
+
 //              progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
          progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
               progressDialog.show();
@@ -745,6 +748,14 @@ startDownload();                }
                         .setOnCancelListener(new OnCancelListener() {
                             @Override
                             public void onCancel() {
+
+                            }
+                        }).setOnProgressListener(new OnProgressListener() {
+                            @Override
+                            public void onProgress(Progress progress) {
+
+                                int prog=(int)((progress.currentBytes*100)/progress.totalBytes);
+                                progressDialog.setProgress(prog);
 
                             }
                         });
