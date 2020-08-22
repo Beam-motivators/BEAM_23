@@ -107,8 +107,7 @@
             android:background="@color/colorWhite"
             android:scaleType="fitXY" />
 
-
-        <View
+         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#F5F0F0" />

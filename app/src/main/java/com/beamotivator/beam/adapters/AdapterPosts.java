@@ -721,12 +721,12 @@ startDownload();                }
             }
 
             private void startDownload() {
-
-                final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppTheme);
-                progressDialog.setCancelable(false);
-                progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
-                progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                progressDialog.show();
+                final ProgressDialog progressDialog = new ProgressDialog(context, R.style.AppCompatAlertDialogStyle);
+                progressDialog.setMessage("Saving");
+                  progressDialog.setCancelable(false);
+//              progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+              progressDialog.show();
                 PRDownloader.initialize(context);
                 DownloadRequest prDownloader= PRDownloader.download(pImage, Variables.app_showing_folder, pImage+".jpg")
                         .build()
