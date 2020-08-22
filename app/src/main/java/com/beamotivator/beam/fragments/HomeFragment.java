@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -53,6 +54,7 @@ import com.beamotivator.beam.TodoMain;
 import com.beamotivator.beam.adapters.AdapterPosts;
 import com.beamotivator.beam.models.ModelPost;
 import com.beamotivator.beam.models.ModelUser;
+import com.beamotivator.beam.models.Userdata;
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -61,6 +63,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -83,7 +86,7 @@ public class HomeFragment extends Fragment {
 
     //firebase auth
     FirebaseAuth firebaseAuth;
-
+String Uid;
     RelativeLayout empty;
     RecyclerView recyclerView;
     List<ModelPost> postList;
@@ -94,8 +97,7 @@ public class HomeFragment extends Fragment {
     //init views
     CircleImageView wokImage,menuImage;
     TextView homeEmpty,wokPoints,menuName,wokname, menuEmail,greetName,homeTitle;
-
-    DrawerLayout homeMenu;
+     DrawerLayout homeMenu;
     ImageView menuIv,homeimg;
     ConstraintLayout wokDisplay;
 
@@ -129,7 +131,7 @@ public class HomeFragment extends Fragment {
 
         }
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
-
+load();
 //        mShimmerViewContainer = view.findViewById(R.id.postshimmer);
 //        mShimmerViewContainer.startShimmer();
 
@@ -185,7 +187,18 @@ public class HomeFragment extends Fragment {
 
 
         menuIv = view.findViewById(R.id.menuIv);
+        homeimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+
+                Intent intent = new Intent(getActivity(), ThierProfile.class);
+                intent.putExtra("uid",Uid);
+                startActivity(intent);
+
+            }
+        });
         //open drawer when menu is clicked
         menuIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -276,6 +289,52 @@ public class HomeFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void load() {
+
+        FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+
+        final DatabaseReference users = FirebaseDatabase.getInstance().getReference("Users");
+        Query query = users.orderByChild("email").equalTo(userr.getEmail());
+        final List<Userdata> user = new ArrayList<>();
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if(dataSnapshot.exists()) {
+                    user.add(dataSnapshot.getValue(Userdata.class));
+                    Userdata userlogin = dataSnapshot.getValue(Userdata.class);
+                      Uid = userlogin.getUid().toString();
+
+
+
+                 }
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+
+
+
+            }
+        });
     }
 
     private NavigationView.OnNavigationItemSelectedListener drawerSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {

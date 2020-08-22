@@ -141,7 +141,22 @@ public class AdapterPostsview extends RecyclerView.Adapter<AdapterPostsview.MyHo
             Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
+        Query query = likesRef.orderByChild("pId").equalTo(pId);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds:snapshot.getChildren())
+                {
+                    String pLikes = ""+ Objects.requireNonNull(ds.child("pLikes").getValue()).toString();
+                    myHolder.tv_likeCount.setText(pLikes + " Helpful");
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         myHolder.image_furniture.setOnClickListener(new View.OnClickListener() {
             @Override
