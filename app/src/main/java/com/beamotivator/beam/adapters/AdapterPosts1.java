@@ -10,8 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,12 +25,12 @@ import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-  import androidx.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.beamotivator.beam.AboutActivity;
 import com.beamotivator.beam.Imagepopup.PhotoFullPopupWindow;
 import com.beamotivator.beam.PostDetailActivity;
 import com.beamotivator.beam.PostLikedByActivity;
@@ -40,13 +38,11 @@ import com.beamotivator.beam.R;
 import com.beamotivator.beam.ThierProfile;
 import com.beamotivator.beam.ThierProfile2;
 import com.beamotivator.beam.Variables;
-import com.beamotivator.beam.fragments.FragmentMy_Post;
 import com.beamotivator.beam.models.ModelPost;
-import com.beamotivator.beam.models.ModelUser;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
- import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.downloader.Error;
 import com.downloader.OnCancelListener;
@@ -90,7 +86,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
+public class AdapterPosts1 extends RecyclerView.Adapter<AdapterPosts1.MyHolder> {
 
     Context context;
     List<ModelPost> postList;
@@ -108,7 +104,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
     boolean mProcessLike = false;
     boolean mSaved = false;
-    public AdapterPosts(Context context, List<ModelPost> postList) {
+    public AdapterPosts1(Context context, List<ModelPost> postList) {
         this.context = context;
         this.postList = postList;
         firebaseAuth = FirebaseAuth.getInstance();
@@ -223,7 +219,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                           myHolder. progressBar.setVisibility(View.GONE);
+                            myHolder. progressBar.setVisibility(View.GONE);
                             return false;
                         }
 
@@ -437,7 +433,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 //start Post detail activity
                 Intent intent =  new Intent(context, PostDetailActivity.class);
                 intent.putExtra("postId",pId);//will get the post id with this, ie id of post clicked
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
@@ -771,7 +766,6 @@ else {
         });
         popupMenu.getMenu().add(Menu.NONE,2,0,"Details");
 
-        popupMenu.getMenu().add(Menu.NONE,3,0,"Save");
 
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -790,11 +784,7 @@ else {
                     intent.putExtra("postId",pId);
                     context.startActivity(intent);
                 }
-                else if(id == 3)
-                {
-                    //start post detail activity
-                    startDownload();
-                }
+
                 return false;
             }
 

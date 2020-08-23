@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beamotivator.beam.R;
 import com.beamotivator.beam.ThierProfile;
-import com.beamotivator.beam.ThierProfile2;
 import com.beamotivator.beam.models.ModelUser;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,8 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
 
@@ -99,14 +95,10 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
                 //Toast.makeText(context, "You clicked", Toast.LENGTH_SHORT).show();
                 //to go to the respective user during with his uid
 
-                Intent intent = new Intent(context, ThierProfile2.class);
-                intent.putExtra("uid",uid);
-                SharedPreferences sh=context.getSharedPreferences("posts",MODE_PRIVATE);
-                SharedPreferences.Editor ee=sh.edit();
-                ee.putString("uid",uid);
-                ee.apply();
+                            Intent prof = new Intent(context, ThierProfile.class);
+                            prof.putExtra("uid",uid);
+                            context.startActivity(prof);
 
-                context.startActivity(intent);
             }
         });
 

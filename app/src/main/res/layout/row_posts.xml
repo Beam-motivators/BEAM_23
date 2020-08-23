@@ -4,10 +4,9 @@
     android:id="@+id/postsCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
-    android:paddingLeft="5dp"
+     android:layout_marginTop="10dp"
+     android:paddingLeft="5dp"
+android:background="@color/colorWhite"
     android:paddingTop="5dp"
     android:layout_marginBottom="5dp"
     android:paddingRight="5dp"
@@ -100,7 +99,15 @@
             android:textColor="@color/oxblue"
             android:textSize="16sp"
             android:textStyle="bold" />
-
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+         android:layout_height="100dp"
+        android:layout_marginTop="200dp"
+        android:visibility="visible" />
         <ImageView
             android:id="@+id/pImageIv"
             android:layout_width="match_parent"
@@ -108,7 +115,7 @@
             android:background="@color/colorWhite"
             android:scaleType="fitXY" />
 
-
+</RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

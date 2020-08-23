@@ -1,23 +1,20 @@
-package com.beamotivator.beam.fragments;
-
-
-
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
+package com.beamotivator.beam;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.beamotivator.beam.R;
-import com.beamotivator.beam.SavedPost;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+
 import com.beamotivator.beam.adapters.AdapterPosts;
+import com.beamotivator.beam.adapters.AdapterPosts1;
+import com.beamotivator.beam.adapters.AdapterPostsview;
 import com.beamotivator.beam.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,60 +26,59 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.Context.MODE_PRIVATE;
-
-public class FragmentMy_Post extends Fragment {
-
+public class View_Poast extends AppCompatActivity {
     RecyclerView savedPostsRv;
 
     List<ModelPost> postList;
-    AdapterPosts adapterPosts;
+    AdapterPosts1 adapterPosts;
 
     FirebaseAuth firebaseAuth;
     String myId ;
     String ig = "";
     int count  = 0;
     SharedPreferences sh;
-    public FragmentMy_Post() {
-    }
-
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.fragment_my_post, container, false);
-
-        //set firebase
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            getWindow().setStatusBarColor(getColor(android.R.color.white));
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getWindow().setStatusBarColor(Color.BLACK);
+            }
+        }
+        setContentView(R.layout.activity_view__poast);
         firebaseAuth = FirebaseAuth.getInstance();
         myId = firebaseAuth.getCurrentUser().getUid();
 
-        sh= getActivity().getSharedPreferences("posts",MODE_PRIVATE);
+        sh=  getSharedPreferences("posts",MODE_PRIVATE);
 
 
 
-        savedPostsRv =root. findViewById(R.id.myposts);
-
-        postList = new ArrayList<>();
+        savedPostsRv =  findViewById(R.id.viewpost);
+         postList = new ArrayList<>();
 
         loadSavedPosts();
 //
 
 
-        return  root;
-    }
+     }
 
     private void loadSavedPosts() {
 
         //linear layout for recyclerview
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 
         //show newest posts, load from last
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
+        savedPostsRv.setLayoutManager(layoutManager);
 
         //set this layout to recycler view
-        savedPostsRv.setLayoutManager(layoutManager);
+
+
+
 
         myId = firebaseAuth.getCurrentUser().getUid();
 
@@ -115,7 +111,7 @@ public class FragmentMy_Post extends Fragment {
 
 
                     //adapter
-                    adapterPosts = new AdapterPosts(getActivity(),postList);
+                    adapterPosts = new AdapterPosts1(getApplicationContext(),postList);
 
                     //set adapter to recycler view
                     savedPostsRv.setAdapter(adapterPosts);
@@ -133,4 +129,12 @@ public class FragmentMy_Post extends Fragment {
         });
 
     }
+    public void onBackPressed() {
+
+        SharedPreferences.Editor e = sh.edit();
+        e.clear();
+        e.apply();
+        finish();
+    }
 }
+
