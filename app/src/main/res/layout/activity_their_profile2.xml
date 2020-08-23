@@ -101,37 +101,30 @@
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/news_tab"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="5dp"
-                    app:cardBackgroundColor="@color/greentheme"
-                    android:background="@color/greentheme"
-                    app:cardUseCompatPadding="true">
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/news_tab"
-                        android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        android:layout_gravity="center"
-                        android:background="@color/greentheme"
-                        android:paddingRight="@dimen/spacing_large"
-                        app:tabGravity="fill"
-                        app:tabIndicatorColor="@color/bluetheme"
-                        app:tabIndicatorHeight="3dp"
-                        >
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="center"
+                    android:background="@color/colorBlack"
+                    android:paddingRight="@dimen/spacing_large"
+                    app:tabTextColor="@color/colorWhite"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@color/bluetheme"
+                    app:tabIndicatorHeight="3dp"
+                    >
 
-                        <com.google.android.material.tabs.TabItem
-                            android:id="@+id/tab_about"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Post" />
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tab_about"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Post" />
 
 
 
 
 
-                    </com.google.android.material.tabs.TabLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.tabs.TabLayout>
 
             </com.google.android.material.appbar.AppBarLayout>
 
