@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -49,6 +50,7 @@ import com.beamotivator.beam.R;
 import com.beamotivator.beam.SavedPost;
 import com.beamotivator.beam.SuggestionsActivity;
 import com.beamotivator.beam.ThierProfile;
+import com.beamotivator.beam.ThierProfile2;
 import com.beamotivator.beam.TodoMain;
 import com.beamotivator.beam.adapters.AdapterPosts;
 import com.beamotivator.beam.models.ModelPost;
@@ -77,6 +79,8 @@ import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class HomeFragment extends Fragment {
@@ -109,6 +113,7 @@ public class HomeFragment extends Fragment {
     Resources resources;
 
     String myUid;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -186,10 +191,25 @@ public class HomeFragment extends Fragment {
 
         menuIv = view.findViewById(R.id.menuIv);
 
+        homeimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ThierProfile.class);
+                intent.putExtra("uid",myUid);
+                SharedPreferences sh= requireActivity().getSharedPreferences("posts",MODE_PRIVATE);
+                SharedPreferences.Editor ee=sh.edit();
+                ee.putString("uid",myUid);
+                ee.apply();
+
+                requireActivity().startActivity(intent);
+            }
+        });
+
         //open drawer when menu is clicked
         menuIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                empty.setVisibility(View.GONE);
                 homeEmpty.setVisibility(View.GONE);
                 homeMenu.openDrawer(GravityCompat.START);
             }
@@ -416,6 +436,7 @@ public class HomeFragment extends Fragment {
         //set this layout to recycler view
         recyclerView.setLayoutManager(layoutManager);
 
+
         //path of all posts
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
         final DatabaseReference gRef = FirebaseDatabase.getInstance().getReference("Groups");
@@ -443,8 +464,9 @@ public class HomeFragment extends Fragment {
                                 adapterPosts = new AdapterPosts(getActivity(),postList);
 
                                 //set adapter to recyclerview
-                                recyclerView.setAdapter(adapterPosts);
                             }
+
+                            recyclerView.setAdapter(adapterPosts);
 
                             if(postList.size() == 0)
                             {
@@ -472,6 +494,7 @@ public class HomeFragment extends Fragment {
 
 
                 }
+
 
 
 

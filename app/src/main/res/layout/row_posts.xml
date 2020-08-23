@@ -37,8 +37,7 @@
                 android:id="@+id/uPictureIv"
                 android:layout_width="44dp"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_image" />
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:id="@+id/profileLayout"

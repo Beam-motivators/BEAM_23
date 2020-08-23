@@ -83,6 +83,9 @@ SharedPreferences sh;
         Toolbar profileTlbr = findViewById(R.id.profileToolbar);
         tabLayout = findViewById(R.id.news_tab);
 
+        setSupportActionBar(profileTlbr);
+        getSupportActionBar().setTitle("Profile");
+
 
         viewPager = findViewById(R.id.container11);
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
@@ -147,117 +150,7 @@ SharedPreferences sh;
 
         postList = new ArrayList<>();
 
-       // loadHisPosts();
     }
-
-//    private void loadHisPosts() {
-//        //linear layout for recyclerview
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//
-//        //show newest posts, load from last
-//        layoutManager.setStackFromEnd(true);
-//        layoutManager.setReverseLayout(true);
-//
-//        //set this layout to recycler view
-//        postsRecyclerView.setLayoutManager(layoutManager);
-//
-//        //init post list
-//        DatabaseReference ref  = FirebaseDatabase.getInstance().getReference("Posts");
-//
-//        //query to load posts
-//        Query query = ref.orderByChild("uid").equalTo(uid);
-//
-//        //get all data by the user
-//        query.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                postList.clear();
-//
-//                for(DataSnapshot ds:dataSnapshot.getChildren())
-//                {
-//                    ModelPost myPost = ds.getValue(ModelPost.class);
-//
-//                    //add post
-//                    postList.add(myPost);
-//
-//                    //adapter
-//                    adapterPosts = new AdapterPosts(ThierProfile.this,postList);
-//
-//                    //set this adapter to recycler view
-//                    postsRecyclerView.setAdapter(adapterPosts);
-//                }
-//                if(postList.size() == 0)
-//                {
-//                    postsRecyclerView.setVisibility(View.GONE);
-//                    emptyProfile.setVisibility(View.VISIBLE);
-//                }
-//                else
-//                {
-//                    postsRecyclerView.setVisibility(View.VISIBLE);
-//                    emptyProfile.setVisibility(View.GONE);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(ThierProfile.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//
-//    }
-
-    /*public void searchHisPosts(final String searchQuery){
-        //linear layout for recyclerview
-        LinearLayoutManager layoutManager = new LinearLayoutManager(ThierProfile.this);
-
-        //show newest posts, load from last
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
-
-        //set this layout to recycler view
-        postsRecyclerView.setLayoutManager(layoutManager);
-
-        //init post list
-        DatabaseReference ref  =FirebaseDatabase.getInstance().getReference("Posts");
-
-        //query to load posts
-        Query query = ref.orderByChild("uid").equalTo(uid);
-
-        //get all data by the user
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
-
-                for(DataSnapshot ds:dataSnapshot.getChildren())
-                {
-                    ModelPost myPost = ds.getValue(ModelPost.class);
-
-                    if(myPost.getpTitle().toLowerCase().contains(searchQuery.toLowerCase())||
-                            myPost.getpDescr().toLowerCase().contains((searchQuery.toLowerCase()))){
-                        //add to list
-                        postList.add(myPost);
-                    }
-
-                    //add post
-                    postList.add(myPost);
-
-                    //adapter
-                    adapterPosts = new AdapterPosts(ThierProfile.this,postList);
-
-                    //set this adapter to recycler view
-                    postsRecyclerView.setAdapter(adapterPosts);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ThierProfile.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }*/
 
 
 

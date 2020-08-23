@@ -12,12 +12,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 ;
 
 import com.beamotivator.beam.R;
 import com.beamotivator.beam.adapters.AdapterPosts;
+import com.beamotivator.beam.adapters.AdapterPostsview;
+import com.beamotivator.beam.adapters.AdapterSaved;
 import com.beamotivator.beam.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +39,7 @@ public class FragmentSaved_post extends Fragment {
     RecyclerView savedPostsRv;
 
     List<ModelPost> postList;
-    AdapterPosts adapterPosts;
+    AdapterSaved adapterPosts;
 
     FirebaseAuth firebaseAuth;
     String myId ;
@@ -49,7 +52,7 @@ public class FragmentSaved_post extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         View root = inflater.inflate(R.layout.fragment_my_saved, container, false);
+        View root = inflater.inflate(R.layout.fragment_my_saved, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
         myId = firebaseAuth.getCurrentUser().getUid();
 
@@ -74,11 +77,11 @@ public class FragmentSaved_post extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
         //show newest posts, load from last
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
-
+        layoutManager.setStackFromEnd(false);
+        layoutManager.setReverseLayout(false);
+        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(),3);
+        savedPostsRv.setLayoutManager(layoutManager1);
         //set this layout to recycler view
-        savedPostsRv.setLayoutManager(layoutManager);
 
         myId = firebaseAuth.getCurrentUser().getUid();
 
@@ -112,11 +115,13 @@ public class FragmentSaved_post extends Fragment {
 
 
                                         //adapter
-                                        adapterPosts = new AdapterPosts(getActivity(),postList);
+                                        adapterPosts = new AdapterSaved(getActivity(),postList);
 
                                         //set adapter to recycler view
+
                                         savedPostsRv.setAdapter(adapterPosts);
-                                    }
+
+                                        }
 
 
 
@@ -130,6 +135,7 @@ public class FragmentSaved_post extends Fragment {
                             });
 
                 }
+
             }
 
             @Override
@@ -144,25 +150,3 @@ public class FragmentSaved_post extends Fragment {
 
 }
 
-//    public void setLocale(String hi) {
-//        Locale locale=new Locale(hi);
-//        Locale.setDefault(locale);
-//        Configuration configuration=new Configuration();
-//        configuration.locale=locale;
-//        getResources().updateConfiguration(configuration,getResources().getDisplayMetrics());
-//        SharedPreferences sh=getActivity().getSharedPreferences("Settings",MODE_PRIVATE);
-//        SharedPreferences.Editor editor=sh.edit();
-//        editor.putString("my",hi);
-//        editor.apply();
-//    }
-//    private void loadLocale() {
-//
-//        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("Settings",MODE_PRIVATE);
-//        String language=sharedPreferences.getString("my","");
-//        setLocale(language);
-//
-//
-//    }
-
-
-//}

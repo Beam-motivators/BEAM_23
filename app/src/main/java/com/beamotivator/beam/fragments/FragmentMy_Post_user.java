@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beamotivator.beam.R;
 import com.beamotivator.beam.adapters.AdapterPosts;
+import com.beamotivator.beam.adapters.AdapterPostsview;
 import com.beamotivator.beam.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +35,7 @@ public class FragmentMy_Post_user extends Fragment {
     RecyclerView savedPostsRv;
 
     List<ModelPost> postList;
-    AdapterPosts adapterPosts;
+    AdapterPostsview adapterPosts;
 
     FirebaseAuth firebaseAuth;
     String myId ;
@@ -56,7 +58,7 @@ public class FragmentMy_Post_user extends Fragment {
 
         sh= getActivity().getSharedPreferences("posts",MODE_PRIVATE);
 
- 
+
 
         savedPostsRv =root. findViewById(R.id.myposts);
 
@@ -77,9 +79,8 @@ public class FragmentMy_Post_user extends Fragment {
         //show newest posts, load from last
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
-
-        //set this layout to recycler view
-        savedPostsRv.setLayoutManager(layoutManager);
+        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(),3);
+        savedPostsRv.setLayoutManager(layoutManager1);
 
         myId = firebaseAuth.getCurrentUser().getUid();
 
@@ -97,37 +98,37 @@ public class FragmentMy_Post_user extends Fragment {
         //now check for the post details
         DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Posts");
         ref1.orderByChild("uid").equalTo(myId).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
 
-                        for(DataSnapshot ds1:datasnapshot.getChildren()){
-
-
-                            ModelPost modelPost = ds1.getValue(ModelPost.class);
+                for(DataSnapshot ds1:datasnapshot.getChildren()){
 
 
-                            //add post
-                            postList.add(modelPost);
+                    ModelPost modelPost = ds1.getValue(ModelPost.class);
 
 
-
-                            //adapter
-                            adapterPosts = new AdapterPosts(getActivity(),postList);
-
-                            //set adapter to recycler view
-                            savedPostsRv.setAdapter(adapterPosts);
-                        }
+                    //add post
+                    postList.add(modelPost);
 
 
 
+                    //adapter
+                    adapterPosts = new AdapterPostsview(getActivity(),postList);
 
-                    }
+                    //set adapter to recycler view
+                    savedPostsRv.setAdapter(adapterPosts);
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }

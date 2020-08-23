@@ -13,7 +13,7 @@
         android:icon="@drawable/bunkcheck"/>
 
     <item android:id="@+id/personalInfo"
-        android:title="Personal Info"
+        android:title="My Profile"
         android:icon="@drawable/personalinfo"
         />
 
@@ -23,9 +23,6 @@
 
     <item android:title="Others">
         <menu>
-            <item android:title="Settings"
-                android:id="@+id/menuSettings"
-                android:icon="@drawable/ic_settings"/>
 
             <item android:id="@+id/menuSuggestions"
                 android:title="Suggestions"

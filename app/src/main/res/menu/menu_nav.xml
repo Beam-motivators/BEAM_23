@@ -14,9 +14,10 @@
         android:enabled="false"
         tools:ignore="MenuTitle"/>
 
-    <item android:id="@+id/nav_saved"
-        android:title="Saved"
-        android:icon="@drawable/ic_groups"/>
+    <item
+        android:id="@+id/nav_saved"
+        android:icon="@drawable/ic_groups"
+        android:title="Groups" />
 
     <item android:id="@+id/nav_notifications"
         android:title="Notifications"

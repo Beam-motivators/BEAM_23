@@ -75,6 +75,12 @@ SharedPreferences sh;
 
         Toolbar profileTlbr = findViewById(R.id.profileToolbar);
         tabLayout = findViewById(R.id.news_tab);
+        setSupportActionBar(profileTlbr);
+
+        getSupportActionBar().setTitle("Profile");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         viewPager = findViewById(R.id.container11);
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
@@ -142,173 +148,9 @@ SharedPreferences sh;
        // loadHisPosts();
     }
 
-//    private void loadHisPosts() {
-//        //linear layout for recyclerview
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//
-//        //show newest posts, load from last
-//        layoutManager.setStackFromEnd(true);
-//        layoutManager.setReverseLayout(true);
-//
-//        //set this layout to recycler view
-//        postsRecyclerView.setLayoutManager(layoutManager);
-//
-//        //init post list
-//        DatabaseReference ref  = FirebaseDatabase.getInstance().getReference("Posts");
-//
-//        //query to load posts
-//        Query query = ref.orderByChild("uid").equalTo(uid);
-//
-//        //get all data by the user
-//        query.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                postList.clear();
-//
-//                for(DataSnapshot ds:dataSnapshot.getChildren())
-//                {
-//                    ModelPost myPost = ds.getValue(ModelPost.class);
-//
-//                    //add post
-//                    postList.add(myPost);
-//
-//                    //adapter
-//                    adapterPosts = new AdapterPosts(ThierProfile.this,postList);
-//
-//                    //set this adapter to recycler view
-//                    postsRecyclerView.setAdapter(adapterPosts);
-//                }
-//                if(postList.size() == 0)
-//                {
-//                    postsRecyclerView.setVisibility(View.GONE);
-//                    emptyProfile.setVisibility(View.VISIBLE);
-//                }
-//                else
-//                {
-//                    postsRecyclerView.setVisibility(View.VISIBLE);
-//                    emptyProfile.setVisibility(View.GONE);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(ThierProfile.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//
-//    }
-
-    /*public void searchHisPosts(final String searchQuery){
-        //linear layout for recyclerview
-        LinearLayoutManager layoutManager = new LinearLayoutManager(ThierProfile.this);
-
-        //show newest posts, load from last
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
-
-        //set this layout to recycler view
-        postsRecyclerView.setLayoutManager(layoutManager);
-
-        //init post list
-        DatabaseReference ref  =FirebaseDatabase.getInstance().getReference("Posts");
-
-        //query to load posts
-        Query query = ref.orderByChild("uid").equalTo(uid);
-
-        //get all data by the user
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
-
-                for(DataSnapshot ds:dataSnapshot.getChildren())
-                {
-                    ModelPost myPost = ds.getValue(ModelPost.class);
-
-                    if(myPost.getpTitle().toLowerCase().contains(searchQuery.toLowerCase())||
-                            myPost.getpDescr().toLowerCase().contains((searchQuery.toLowerCase()))){
-                        //add to list
-                        postList.add(myPost);
-                    }
-
-                    //add post
-                    postList.add(myPost);
-
-                    //adapter
-                    adapterPosts = new AdapterPosts(ThierProfile.this,postList);
-
-                    //set this adapter to recycler view
-                    postsRecyclerView.setAdapter(adapterPosts);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ThierProfile.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }*/
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
-        menu.findItem(R.id.add_post).setVisible(false);
-        menu.findItem(R.id.action_groupInfo).setVisible(false);
-        menu.findItem(R.id.action_create_group).setVisible(false);
-        menu.findItem(R.id.action_add_participant).setVisible(false);
 
 
-        MenuItem item = menu.findItem(R.id.searchAction);
-        //searchview of user specific post
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
 
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                //called when user presses search button
-//                if(!TextUtils.isEmpty(s)){
-//                    searchHisPosts(s);
-//                }
-//                else
-//                {
-//                    loadHisPosts();
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                //called when any letter is pressed on the search bar
-//                if(!TextUtils.isEmpty(s))
-//                {
-//                    searchHisPosts(s);
-//                }
-//                else
-//                {
-//                    loadHisPosts();
-//                }
-//                return false;
-//            }
-//        });
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.actionLogout)
-        {
-            firebaseAuth.signOut();
-            //checkuserstatus();
-        }
-        if(id == R.id.add_post)
-        {
-            startActivity(new Intent(ThierProfile2.this,AboutActivity.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onSupportNavigateUp() {

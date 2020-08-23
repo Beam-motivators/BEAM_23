@@ -44,7 +44,6 @@
                         android:id="@+id/avatarIv"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/tea_cup"
   />
 
                     <View
@@ -60,7 +59,7 @@
                             android:id="@+id/nameTV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mary Jackson"
+                            android:text=""
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                             android:textColor="@android:color/white"
                             app:fontFamily="sans-serif-medium" />
@@ -79,7 +78,7 @@
 
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Interior Design"
+                                android:text=""
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                                 android:textColor="@color/colorWhite" />
 
@@ -125,7 +124,7 @@
                 android:id="@+id/container11"
                 android:layout_width="match_parent"
                 android:layout_height="659dp"
-                android:background="@android:color/white"
+                android:background="#ece3e6"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:ignore="PrivateResource" />
         </LinearLayout>

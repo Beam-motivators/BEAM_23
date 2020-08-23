@@ -149,7 +149,7 @@ public class MyGroupFragment extends Fragment {
                     }
                     else{
                         groupsRv.setVisibility(View.VISIBLE);
-                        groupEmpty.setVisibility(View.VISIBLE);
+                        groupEmpty.setVisibility(View.GONE);
                     }
                 }
             }
