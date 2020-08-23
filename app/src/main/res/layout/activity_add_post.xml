@@ -76,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_white_corner_15"
-                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:backgroundTint="@color/colorPrimary"
                         android:elevation="5dp"
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="top"
