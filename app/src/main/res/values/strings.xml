@@ -2,4 +2,6 @@
     <string name="app_name">BEAM</string>
     <string name="notification1">You have not received any notifications."\n"We will notify you once we have received any.</string>
     <string name="empty1">You are 404 million kilometres away from us."\n"Please tap on refresh button to try connecting back.</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

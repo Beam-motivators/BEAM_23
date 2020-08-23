@@ -279,8 +279,12 @@ public class SearchFragment extends Fragment {
 
 
         private void searchGroup(final String query) {
-            GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(),2);
-            groupsRv.setLayoutManager(layoutManager1);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+            //show newest posts, load from last
+            layoutManager.setStackFromEnd(true);
+            layoutManager.setReverseLayout(true);
+            groupsRv.setLayoutManager(layoutManager);
 
             //get current user
             //final FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -325,11 +329,9 @@ public class SearchFragment extends Fragment {
 
     }
     private void loadMyGroups() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
-        //layoutManager.setReverseLayout(true);
-        //layoutManager.setStackFromEnd(true);
+        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(),2);
+        groupsRv.setLayoutManager(layoutManager1);
 
-          groupsRv.setLayoutManager(layoutManager);
 
 
 

@@ -16,6 +16,11 @@
         <item name="colorAccent">@color/bluetheme</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Toolbar.Light" parent="@style/AppTheme">
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+    </style>
 
 
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">

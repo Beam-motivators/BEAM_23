@@ -1,18 +1,27 @@
 package com.beamotivator.beam.fragments;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
@@ -23,6 +32,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,6 +81,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,7 +93,7 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  implements View.OnClickListener {
 
     //firebase auth
     FirebaseAuth firebaseAuth;
@@ -92,21 +104,20 @@ public class HomeFragment extends Fragment {
     AdapterPosts adapterPosts;
     ShimmerFrameLayout mShimmerViewContainer;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
+ImageView navbtn,imagenavigation;
     //init views
-    CircleImageView wokImage,menuImage;
-    TextView homeEmpty,wokPoints,menuName,wokname, menuEmail,greetName,homeTitle;
+    CircleImageView wokImage;
+    TextView homeEmpty,wokPoints,wokname, greetName,homeTitle;
 
-    DrawerLayout homeMenu;
-    ImageView menuIv,homeimg;
+     ImageView homeimg;
     ConstraintLayout wokDisplay;
+    DrawerLayout drawer;
 
     GoogleSignInClient mGoogleSignInClient;
-
+TextView navigationname,navigationemail;
     CardView wokCard;
-
-    NavigationView homeNav;
-
+LinearLayout menuLogout,setgoals,bunkcheck,saved_Posts,personalInfo,menuSuggestions,aboutus;
+//Toolbar toolbar;
     //To get resources text
     Resources resources;
 ImageView getHomeimg;
@@ -121,22 +132,30 @@ String Uid;
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getActivity().getWindow();
-            Drawable background = getActivity().getResources().getDrawable(R.drawable.main_gradient);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getActivity().getResources().getColor(android.R.color.transparent));
-            //window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
-            window.setBackgroundDrawable(background);
+        Window window = requireActivity().getWindow();
+        @SuppressLint("UseCompatLoadingForDrawables") Drawable background = requireActivity().getResources().getDrawable(R.drawable.main_gradient);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getActivity().getResources().getColor(android.R.color.transparent));
+        window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
+        window.setBackgroundDrawable(background);
 
-        }
-        View view =  inflater.inflate(R.layout.fragment_home, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_home, container, false);
 load();
         mShimmerViewContainer = view.findViewById(R.id.postshimmer);
         mShimmerViewContainer.startShimmer();
+             homeimg = view.findViewById(R.id.homeimgfc);
+        drawer = view.findViewById(R.id.drawer_layout);
 
-        homeimg = view.findViewById(R.id.homeimg);
+        navbtn = view.findViewById(R.id.menubt);
+        navbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                drawer.openDrawer(Gravity.LEFT);
+            }
+        });
+        NavigationView navigationView = (NavigationView) view.findViewById(R.id.nav_view_home);
+        View headerView = navigationView.getHeaderView(0);
+
         homeimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +168,32 @@ load();
 
             }
         });
+
+
+
+        imagenavigation = view.findViewById(R.id.imagenavigation);
+        navigationname = view.findViewById(R.id.navigationname);
+        navigationemail = view.findViewById(R.id.navigationemail);
+
+        menuLogout = view.findViewById(R.id.menuLogout);
+        setgoals = view.findViewById(R.id.setgoals);
+        bunkcheck = view.findViewById(R.id.bunkcheck);
+         saved_Posts = view.findViewById(R.id.saved_Posts);
+        personalInfo = view.findViewById(R.id.personalInfo);
+        menuSuggestions = view.findViewById(R.id.menuSuggestions);
+        aboutus = view.findViewById(R.id.aboutus);
+
+
+        menuLogout.setOnClickListener(this);
+        setgoals.setOnClickListener(this);
+        bunkcheck.setOnClickListener(this);
+        saved_Posts.setOnClickListener(this);
+        personalInfo.setOnClickListener(this);
+        menuSuggestions.setOnClickListener(this);
+        aboutus.setOnClickListener(this);
+
+
+
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.activity_main_swipe_refresh_layout);
 //
 //        mSwipeRefreshLayout.setColorSchemeResources(R.color.greentheme, R.color.gray, R.color.bluetheme);
@@ -188,8 +233,7 @@ load();
         wokname=view.findViewById(R.id.wokName);
         //greetName=view.findViewById(R.id.home_username_greet);
         homeEmpty = view.findViewById(R.id.homeMessage);
-        homeimg = view.findViewById(R.id.homeimg);
-        homeTitle = view.findViewById(R.id.homeTitle);
+         homeTitle = view.findViewById(R.id.homeTitle);
 
         Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale);
         homeTitle.startAnimation(animation);
@@ -200,32 +244,15 @@ load();
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
 
-        menuIv = view.findViewById(R.id.menuIv);
-
-        //open drawer when menu is clicked
-        menuIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                homeEmpty.setVisibility(View.GONE);
-                homeMenu.openDrawer(GravityCompat.START);
-            }
-        });
 
         //set home navigation
-        homeNav = view.findViewById(R.id.menuExpand);
-        homeNav.setItemIconTintList(null);
-        View header = homeNav.getHeaderView(0);
-        menuName = header.findViewById(R.id.menuNameTv);
-        menuImage = header.findViewById(R.id.menuProfileIv);
-        menuEmail = header.findViewById(R.id.menuEmailTv);
+
 
 
 
         //init the drawer layout
-        homeMenu = view.findViewById(R.id.drawerMenu);
 
         //set navigation for drawer
-        homeNav.setNavigationItemSelectedListener(drawerSelectedListener);
 
         //set values of menu drawer
         DatabaseReference menuRef = FirebaseDatabase.getInstance().getReference("Users");
@@ -237,27 +264,29 @@ load();
                         String mName =""+snapshot.child("name").getValue();
                         String mImage = ""+snapshot.child("image").getValue();
                         String email = ""+snapshot.child("email").getValue();
-                        menuName.setText(mName);
+                         navigationname.setText(mName);
 //                        greetName.setText(mName);
-                        menuEmail.setText(email);
+                        navigationemail.setText(email);
 
-                        try{
-                            Glide.with(container)
+                        try {
+                            Glide.with(getActivity())
                                     .load(mImage)
-                                    .centerCrop()
-                                    .into(menuImage);
+                                    .centerInside()
+                                    .into(imagenavigation);
                         }
-                        catch (Exception ignored) {
+                        catch (Exception e) {
+                            Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
 
-                        }
-                        try{
-                            Glide.with(container)
+
+                        try {
+                            Glide.with(getActivity())
                                     .load(mImage)
-                                    .centerCrop()
+                                    .centerInside()
                                     .into(homeimg);
                         }
                         catch (Exception e) {
-
+                            Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -293,6 +322,10 @@ load();
 
         return view;
     }
+
+
+
+
 
     private void load() {
 
@@ -339,48 +372,6 @@ load();
             }
         });
     }
-    private NavigationView.OnNavigationItemSelectedListener drawerSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-            //handle item clicks
-            switch (menuItem.getItemId()){
-
-
-                case R.id.setgoals:
-                    Intent i = new Intent(getActivity(), TodoMain.class);
-                    startActivity(i);
-                    getActivity();
-                    break;
-                case R.id.bunkcheck:
-                    Intent xi = new Intent(getActivity(), Attendance.class);
-                    startActivity(xi);
-                    getActivity();
-                    break;
-
-                case R.id.saved_Posts:
-                    startActivity(new Intent(getActivity(), SavedPost.class));
-                    break;
-
-                case R.id.personalInfo:
-                    Intent prof = new Intent(getActivity(), ThierProfile.class);
-                    prof.putExtra("uid",myUid);
-                    startActivity(prof);
-                    break;
-                case R.id.menuSuggestions:
-                    startActivity(new Intent(getActivity(), SuggestionsActivity.class));
-                    break;
-
-                case R.id.menuLogout:
-                    logout();
-                    break;
-                case R.id.menuAboutUs:
-                    startActivity(new Intent(getActivity(), AboutActivity.class));
-                    break;
-            }
-            return false;
-        }
-    };
 
     private void logout() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -412,48 +403,6 @@ load();
 
 
 
-   /* private void loadPosts() {
-        //linear layout for recyclerview
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        //show newest posts, load from last
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
-        //set this layout to recycler view
-        recyclerView.setLayoutManager(layoutManager);
-        //path of all posts
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
-        Query query = ref.getRef();
-        //get all data from this ref
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
-                for(DataSnapshot ds:dataSnapshot.getChildren()){
-                    ModelPost modelPost = ds.getValue(ModelPost.class);
-                    postList.add(modelPost);
-                    //adapter posts
-                    adapterPosts = new AdapterPosts(getActivity(),postList);
-                    //set adapter to recyclerview
-                    recyclerView.setAdapter(adapterPosts);
-                }
-                if(postList.size() == 0)
-                {
-                    recyclerView.setVisibility(View.GONE);
-                    homeEmpty.setVisibility(View.VISIBLE);
-                }
-                else {
-                    recyclerView.setVisibility(View.VISIBLE);
-                    homeEmpty.setVisibility(View.GONE);
-                    mShimmerViewContainer.stopShimmer();
-                    mShimmerViewContainer.setVisibility(View.INVISIBLE);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                //in case of error
-            }
-        });
-    }*/
 
     private void loadPosts() {
         int len = 0;
@@ -585,4 +534,50 @@ load();
 
 
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+
+            case R.id.setgoals:
+                Intent i = new Intent(getActivity(), TodoMain.class);
+                startActivity(i);
+                getActivity();
+                break;
+            case R.id.bunkcheck:
+                Intent xi = new Intent(getActivity(), Attendance.class);
+                startActivity(xi);
+                getActivity();
+                break;
+
+            case R.id.saved_Posts:
+                startActivity(new Intent(getActivity(), SavedPost.class));
+                break;
+
+            case R.id.personalInfo:
+                Intent prof = new Intent(getActivity(), ThierProfile.class);
+                prof.putExtra("uid",myUid);
+                startActivity(prof);
+                break;
+            case R.id.menuSuggestions:
+                startActivity(new Intent(getActivity(), SuggestionsActivity.class));
+                break;
+
+            case R.id.menuLogout:
+                logout();
+                break;
+            case R.id.aboutus:
+                startActivity(new Intent(getActivity(), AboutActivity.class));
+                break;
+
+        }
+
+
+
+
+
+        drawer.closeDrawer(Gravity.LEFT);
+
+    }
 }
