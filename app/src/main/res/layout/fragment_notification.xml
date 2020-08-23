@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ece9e6"
+    android:background="@color/greentheme"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.NotificationFragment">
 
@@ -28,7 +28,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
-            android:background="#ece9e6"
+            android:background="@color/greentheme"
             android:id="@+id/notificationsRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
 
 
     <LinearLayout
-        android:background="#ece9e6"
+        android:background="@color/greentheme"
         android:visibility="gone"
         android:id="@+id/notificationsEmpty"
     android:layout_width="match_parent"
@@ -59,14 +59,16 @@
             android:layout_height="225dp"
             android:layout_gravity="center"
             android:alpha="0.2"
-            android:src="@drawable/shadow" />
+            android:src="@drawable/shadow"
+            android:tint="@color/colorWhite"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="175dp"
             android:layout_height="175dp"
             android:layout_gravity="center"
             android:alpha="0.2"
-            android:src="@drawable/shadow" />
+            android:src="@drawable/shadow"
+            android:tint="@color/colorWhite"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -74,7 +76,7 @@
             android:layout_gravity="center"
             android:elevation="10dp"
             android:src="@drawable/ic_notifications_light_256dp"
-            />
+            app:tint="@color/colorWhite" />
 
 
     </FrameLayout>
@@ -86,7 +88,7 @@
         android:layout_marginTop="25dp"
         android:text="Winter isn't here yet."
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        android:textColor="@color/fontColor" />
+        android:textColor="@color/colorWhite" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -96,7 +98,7 @@
         android:gravity="center"
         android:text="@string/notification1"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        android:textColor="@color/fontColor" />
+        android:textColor="@color/colorWhite" />
 
 
 </LinearLayout>

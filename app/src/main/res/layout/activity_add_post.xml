@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/lout_head"
-            android:background="@color/colorWhite"
+            android:background="@color/greentheme"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -99,6 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_white_corner_15"
+                android:backgroundTint="@color/greentheme"
                 android:layout_marginTop="@dimen/padding_10"
                 android:padding="@dimen/padding_10"
                 android:layout_margin="@dimen/padding_10"
@@ -114,14 +115,14 @@
                     android:fontFamily="@font/poppins_light"
                     android:gravity="center"
                     android:text="Choose group"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
 
                 <ImageButton
                     android:id="@+id/dropIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_droparrow"
-                    android:tint="@color/colorPrimary"
+                    android:tint="@color/colorWhite"
                     android:background="@null"
                     android:padding="10dp"/>
 
@@ -130,6 +131,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/groupNameRv"
                 android:background="@drawable/bg_white_corner_15"
+                android:backgroundTint="@color/greentheme"
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/padding_10"
                 android:padding="@dimen/padding_10"
@@ -166,7 +168,7 @@
                 android:fontFamily="@font/poppins_light"
                 android:gravity="center"
                 android:text=" *Please stick to posting relevant information\n*This step of yours is for the betterment of all"
-                 android:textColor="@color/colorBlack"
+                 android:textColor="@color/colorWhite"
                 android:textSize="12sp" />
 
 

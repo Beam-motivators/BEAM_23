@@ -2,15 +2,19 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="10dp"
+     app:cardCornerRadius="10dp"
+    android:layout_marginStart="@dimen/padding_10"
+    android:layout_marginEnd="@dimen/padding_10"
+    android:layout_marginTop="@dimen/padding_10"
+    android:layout_marginBottom="@dimen/padding_10"
     android:padding="@dimen/padding_10"
-     android:layout_height="wrap_content">
+    app:cardBackgroundColor="#1e1f24"
+      android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_10"
+         android:background="@color/greentheme"
         android:orientation="vertical">
 
         <ImageView
@@ -29,7 +33,7 @@
             android:singleLine="true"
             android:text="Group Name"
             android:textAlignment="center"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -41,13 +45,16 @@
             android:inputType="textMultiLine|textCapSentences"
             android:text="Group Description"
             android:textAlignment="center"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/colorWhite" />
 
 
         <Button
             android:id="@+id/openGroupBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
             android:layout_marginTop="10dp"
             android:background="@drawable/button"
             android:layout_marginBottom="@dimen/padding_10"

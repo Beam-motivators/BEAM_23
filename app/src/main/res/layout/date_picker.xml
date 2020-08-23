@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/greentheme"
     android:layout_height="match_parent"
     android:padding="8dp">
 
@@ -10,6 +11,9 @@
         android:id="@+id/date_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:calendarTextColor="@color/colorWhite"
+        android:outlineSpotShadowColor="@color/colorWhite"
+        android:outlineAmbientShadowColor="@color/colorWhite"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"/>
 

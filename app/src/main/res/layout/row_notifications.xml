@@ -8,12 +8,13 @@
     app:cardCornerRadius="2dp"
     android:padding="@dimen/padding_10"
     app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/greentheme"
     app:contentPadding="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:background="@color/greentheme"
         android:padding="@dimen/padding_10"
         android:orientation="horizontal">
 
@@ -37,7 +38,7 @@
 
                 android:fontFamily="@font/poppins_light"
                 android:text="Name"
-                android:textColor="@color/oxblue"
+                android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -49,7 +50,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Notification"
-                android:textColor="@color/cadet"
+                android:textColor="@color/colorWhite"
                 android:textSize="16sp" />
 
 

@@ -28,7 +28,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="#ece9e6"
+        android:background="@color/greentheme"
         android:layout_below="@id/groupsTlbr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -476,11 +476,11 @@ RelativeLayout pImage22;
                      * change the icon to another
                      * change text like to liked */
                     likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.thumb_up_24px_fill, 0, 0, 0);
-                    likeBtn.setText("Liked");
+                   // likeBtn.setText("Liked");
                 } else {
                     //user not liked this post
                     likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.thumb_up_24px, 0, 0, 0);
-                    likeBtn.setText("Like");
+                   // likeBtn.setText("Like");
                 }
             }
 

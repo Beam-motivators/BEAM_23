@@ -51,6 +51,7 @@ import com.beamotivator.beam.SuggestionsActivity;
 import com.beamotivator.beam.ThierProfile;
 import com.beamotivator.beam.TodoMain;
 import com.beamotivator.beam.adapters.AdapterPosts;
+import com.beamotivator.beam.adapters.Userdata;
 import com.beamotivator.beam.models.ModelPost;
 import com.beamotivator.beam.models.ModelUser;
 import com.bumptech.glide.Glide;
@@ -61,6 +62,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -107,7 +109,8 @@ public class HomeFragment extends Fragment {
 
     //To get resources text
     Resources resources;
-
+ImageView getHomeimg;
+String Uid;
     String myUid;
     public HomeFragment() {
         // Required empty public constructor
@@ -129,10 +132,23 @@ public class HomeFragment extends Fragment {
 
         }
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
-
+load();
         mShimmerViewContainer = view.findViewById(R.id.postshimmer);
         mShimmerViewContainer.startShimmer();
 
+        homeimg = view.findViewById(R.id.homeimg);
+        homeimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                Intent intent = new Intent(getActivity(), ThierProfile.class);
+                intent.putExtra("uid",Uid);
+                startActivity(intent);
+
+            }
+        });
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.activity_main_swipe_refresh_layout);
 //
 //        mSwipeRefreshLayout.setColorSchemeResources(R.color.greentheme, R.color.gray, R.color.bluetheme);
@@ -242,7 +258,7 @@ public class HomeFragment extends Fragment {
                         }
                         catch (Exception e) {
 
-                           }
+                        }
                     }
 
 
@@ -278,6 +294,51 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    private void load() {
+
+        FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+
+        final DatabaseReference users = FirebaseDatabase.getInstance().getReference("Users");
+        Query query = users.orderByChild("email").equalTo(userr.getEmail());
+        final List<Userdata> user = new ArrayList<>();
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if(dataSnapshot.exists()) {
+                    user.add(dataSnapshot.getValue(Userdata.class));
+                    Userdata userlogin = dataSnapshot.getValue(Userdata.class);
+                    Uid = userlogin.getUid().toString();
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+
+
+
+            }
+        });
+    }
     private NavigationView.OnNavigationItemSelectedListener drawerSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -352,34 +413,26 @@ public class HomeFragment extends Fragment {
 
 
    /* private void loadPosts() {
-
         //linear layout for recyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-
         //show newest posts, load from last
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
-
         //set this layout to recycler view
         recyclerView.setLayoutManager(layoutManager);
-
         //path of all posts
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
-
         Query query = ref.getRef();
         //get all data from this ref
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postList.clear();
-
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
                     ModelPost modelPost = ds.getValue(ModelPost.class);
                     postList.add(modelPost);
-
                     //adapter posts
                     adapterPosts = new AdapterPosts(getActivity(),postList);
-
                     //set adapter to recyclerview
                     recyclerView.setAdapter(adapterPosts);
                 }
@@ -387,7 +440,6 @@ public class HomeFragment extends Fragment {
                 {
                     recyclerView.setVisibility(View.GONE);
                     homeEmpty.setVisibility(View.VISIBLE);
-
                 }
                 else {
                     recyclerView.setVisibility(View.VISIBLE);
@@ -396,7 +448,6 @@ public class HomeFragment extends Fragment {
                     mShimmerViewContainer.setVisibility(View.INVISIBLE);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 //in case of error

@@ -12,12 +12,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.beamotivator.beam.R;
 import com.beamotivator.beam.SavedPost;
 import com.beamotivator.beam.adapters.AdapterPosts;
+import com.beamotivator.beam.adapters.AdapterPostsview;
 import com.beamotivator.beam.models.ModelPost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +38,7 @@ public class FragmentMy_Post extends Fragment {
     RecyclerView savedPostsRv;
 
     List<ModelPost> postList;
-    AdapterPosts adapterPosts;
+    AdapterPostsview adapterPosts;
 
     FirebaseAuth firebaseAuth;
     String myId ;
@@ -80,9 +82,9 @@ public class FragmentMy_Post extends Fragment {
         //show newest posts, load from last
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
-
+        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(),3);
+        savedPostsRv.setLayoutManager(layoutManager1);
         //set this layout to recycler view
-        savedPostsRv.setLayoutManager(layoutManager);
 
         myId = firebaseAuth.getCurrentUser().getUid();
 
@@ -115,7 +117,7 @@ public class FragmentMy_Post extends Fragment {
 
 
                     //adapter
-                    adapterPosts = new AdapterPosts(getActivity(),postList);
+                    adapterPosts = new AdapterPostsview(getActivity(),postList);
 
                     //set adapter to recycler view
                     savedPostsRv.setAdapter(adapterPosts);

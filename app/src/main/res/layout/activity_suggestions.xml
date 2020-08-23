@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ece9e6"
+    android:background="@color/greentheme"
     tools:context=".SuggestionsActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -20,6 +20,7 @@
         android:layout_below="@id/suggestionTlbr"
         android:id="@+id/user_suggestion_layout"
         android:layout_width="match_parent"
+        android:background="@color/greentheme"
         android:layout_height="wrap_content"
         android:visibility="gone">
 
@@ -27,6 +28,8 @@
             android:id="@+id/suggestionTIL"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:textColorHint="@color/colorWhite"
+            app:counterTextColor="@color/colorWhite"
             android:hint="Write your suggestions or feedback!"
             app:hintAnimationEnabled="false"
             android:layout_margin="20dp"
@@ -37,10 +40,16 @@
                 android:id="@+id/suggestionET"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:textColor="@color/oxblue"
-                android:background="@drawable/button_start"
-                android:layout_margin="20dp"/>
+                android:background="@drawable/bg_white_corner_15"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:elevation="5dp"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="top"
+                 android:maxLength="175"
+                android:padding="10dp"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="12dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

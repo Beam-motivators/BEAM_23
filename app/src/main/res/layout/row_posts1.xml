@@ -4,141 +4,128 @@
     android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
-
-<<<<<<< HEAD
+android:background="@color/greentheme"
     android:layout_height="wrap_content">
-=======
-     android:layout_height="wrap_content">
->>>>>>> origin/master
+
     <RelativeLayout
-        android:layout_width="150dp"
-        android:layout_height="150dp">
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/greentheme">
 
-
-
-<<<<<<< HEAD
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:cardCornerRadius="5dp"
+            app:cardUseCompatPadding="true">
 
-            <ImageView
-                android:id="@+id/image_furniture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/tea_cup"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginHorizontal="6dp"
-                android:orientation="vertical">
-=======
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
+
 
                 <ImageView
                     android:id="@+id/image_furniture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/tea_cup"
-                  />
->>>>>>> origin/master
+                     tools:src="@drawable/tea_cup"
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_play"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/thumb_on"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_likeCount"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/thumb_up_24px"
-
-                        app:tint="@color/bluetheme" />
-
-                    <TextView
-                        android:id="@+id/tv_likeCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/poppins_light"
-                        android:textColor="@color/bluetheme"
-                        android:textSize="11dp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </RelativeLayout>
-    </RelativeLayout>
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:orientation="horizontal">-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/image_furniture"-->
-    <!--            android:layout_width="150dp"-->
-    <!--            android:layout_height="200dp"-->
-    <!--            android:layout_gravity="center_vertical"-->
-    <!--             android:src="@drawable/tea_cup" />-->
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@+id/img_play"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@{model.postViewCount}"
+                    android:textColor="@color/bluetheme"
+                    android:textSize="11dp" />
 
 
-    <!--    </LinearLayout>-->
-=======
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginHorizontal="6dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/thumb_up_24px"
-
-                            app:tint="@color/bluetheme" />
-
-                        <TextView
-                            android:id="@+id/tv_likeCount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:fontFamily="@font/poppins_light"
-                            android:textColor="@color/bluetheme"
-                            android:textSize="11dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
             </RelativeLayout>
-     </RelativeLayout>
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="horizontal">-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/image_furniture"-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="200dp"-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--             android:src="@drawable/tea_cup" />-->
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+<!--    <RelativeLayout-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="150dp">-->
 
 
-<!--    </LinearLayout>-->
->>>>>>> origin/master
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:background="#15161a"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/image_furniture"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:src="@drawable/tea_cup"-->
+<!--                />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_marginHorizontal="6dp"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="15dp"-->
+<!--                        android:layout_height="15dp"-->
+<!--                        android:src="@drawable/thumb_up_24px"-->
+
+<!--                        app:tint="@color/bluetheme" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_likeCount"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        android:fontFamily="@font/poppins_light"-->
+<!--                        android:textColor="@color/bluetheme"-->
+<!--                        android:textSize="11dp" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>-->
+<!--        </RelativeLayout>-->
+<!--    </RelativeLayout>-->
+<!--    &lt;!&ndash;    <LinearLayout&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_height="match_parent"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:orientation="horizontal">&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        <ImageView&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:id="@+id/image_furniture"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_width="150dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_height="200dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_gravity="center_vertical"&ndash;&gt;-->
+<!--    &lt;!&ndash;             android:src="@drawable/tea_cup" />&ndash;&gt;-->
+
+
+<!--    &lt;!&ndash;    </LinearLayout>&ndash;&gt;-->
 
 </LinearLayout>

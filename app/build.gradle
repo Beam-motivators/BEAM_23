@@ -48,6 +48,7 @@ dependencies {
     //implementation 'com.github.yalantis:ucrop:2.2.5'
 
     implementation 'com.mindorks.android:prdownloader:0.6.0'
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -68,8 +69,7 @@ dependencies {
     //volley an http library that makes networking easier
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.google.code.gson:gson:2.8.6'
-
-    //to make custom google sign in button
+     //to make custom google sign in button
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
     implementation 'com.github.captain-miao:optroundcardview:1.0.0'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'

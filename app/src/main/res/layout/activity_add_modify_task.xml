@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/greentheme">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -45,20 +45,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/whitePassive"
+        android:background="@drawable/main_gradient"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
             android:id="@+id/edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/whitePassive"
+            android:background="@drawable/button"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:padding="10dp"
             android:gravity="top"
+            android:layout_marginStart="@dimen/padding_10"
+            android:layout_marginEnd="@dimen/padding_10"
+            android:layout_marginTop="@dimen/padding_10"
+            android:layout_marginBottom="@dimen/padding_10"
             android:hint="What are you planning?"
             android:inputType="textMultiLine"
-            android:padding="20dp"
-            android:textColor="@color/independance"
-            android:textColorHint="@color/black_overlay" />
+             android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +75,7 @@
                 android:id="@+id/custom_config"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorText"
+                android:background="@color/greentheme"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:onClick="chooseDate"
@@ -81,7 +86,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:background="@color/black_overlay"
+                    android:background="@color/colorWhite"
                     android:src="@drawable/cal" />
 
                 <TextView
@@ -90,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="1/08/2020"
-                    android:textColor="@color/independance"
+                    android:textColor="@color/colorWhite"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 

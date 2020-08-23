@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:shimmer="schemas.android.com/tools"
     android:id="@+id/HomeLayout"
-android:background="@color/colorWhite"
+    android:background="@color/greentheme"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment"
     tools:ignore="NamespaceTypo">
@@ -14,14 +14,14 @@ android:background="@color/colorWhite"
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/drawerMenu">
+         android:id="@+id/drawerMenu">
 
 
 
 
 
         <RelativeLayout
-            android:background="#ece9e6"
+            android:background="@color/greentheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -38,8 +38,8 @@ android:background="@color/colorWhite"
 
                 <ImageView
                     android:id="@+id/menuIv"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_menu" />
 
                 <TextView
@@ -59,7 +59,7 @@ android:background="@color/colorWhite"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                     android:layout_marginEnd="1dp"
+                    android:layout_marginEnd="1dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginRight="1dp"
                     android:src="@drawable/tea_cup" />
@@ -81,55 +81,55 @@ android:background="@color/colorWhite"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                        android:id="@+id/greet_layout"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_margin="0dp"-->
-<!--android:visibility="visible"-->
-<!--                        android:background="@drawable/gradient_list"-->
-<!--                        android:paddingLeft="20dp"-->
-<!--                        android:paddingRight="20dp">-->
+                    <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+                    <!--                        android:id="@+id/greet_layout"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_margin="0dp"-->
+                    <!--android:visibility="visible"-->
+                    <!--                        android:background="@drawable/gradient_list"-->
+                    <!--                        android:paddingLeft="20dp"-->
+                    <!--                        android:paddingRight="20dp">-->
 
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/greet_home"-->
-<!--                            android:layout_width="140dp"-->
-<!--                            android:layout_height="26dp"-->
-<!--                            android:layout_marginStart="16dp"-->
-<!--                            android:layout_marginTop="28dp"-->
-<!--                            android:fontFamily="@font/poppins"-->
-<!--                            android:text="Welcome back,"-->
-<!--                            android:textSize="18dp"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent" />-->
+                    <!--                        <TextView-->
+                    <!--                            android:id="@+id/greet_home"-->
+                    <!--                            android:layout_width="140dp"-->
+                    <!--                            android:layout_height="26dp"-->
+                    <!--                            android:layout_marginStart="16dp"-->
+                    <!--                            android:layout_marginTop="28dp"-->
+                    <!--                            android:fontFamily="@font/poppins"-->
+                    <!--                            android:text="Welcome back,"-->
+                    <!--                            android:textSize="18dp"-->
+                    <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/home_username_greet"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginStart="16dp"-->
-<!--                            android:fontFamily="@font/poppins_bold"-->
-<!--                            android:textSize="30dp"-->
-<!--                            android:textStyle="bold"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toBottomOf="@+id/greet_home"-->
-<!--                            app:layout_constraintVertical_bias="0.0" />-->
+                    <!--                        <TextView-->
+                    <!--                            android:id="@+id/home_username_greet"-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_marginStart="16dp"-->
+                    <!--                            android:fontFamily="@font/poppins_bold"-->
+                    <!--                            android:textSize="30dp"-->
+                    <!--                            android:textStyle="bold"-->
+                    <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                            app:layout_constraintTop_toBottomOf="@+id/greet_home"-->
+                    <!--                            app:layout_constraintVertical_bias="0.0" />-->
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/imageView"-->
-<!--                            android:layout_width="148dp"-->
-<!--                            android:layout_height="140dp"-->
-<!--                            android:layout_marginEnd="4dp"-->
-<!--                            android:paddingBottom="20dp"-->
-<!--                            android:src="@drawable/home_username"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"-->
-<!--                            app:layout_constraintVertical_bias="0.0" />-->
+                    <!--                        <ImageView-->
+                    <!--                            android:id="@+id/imageView"-->
+                    <!--                            android:layout_width="148dp"-->
+                    <!--                            android:layout_height="140dp"-->
+                    <!--                            android:layout_marginEnd="4dp"-->
+                    <!--                            android:paddingBottom="20dp"-->
+                    <!--                            android:src="@drawable/home_username"-->
+                    <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--                            app:layout_constraintTop_toTopOf="parent"-->
+                    <!--                            app:layout_constraintVertical_bias="0.0" />-->
 
-<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+                    <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
                     <androidx.cardview.widget.CardView
@@ -252,39 +252,39 @@ android:background="@color/colorWhite"
                         android:layout_height="match_parent">
 
 
-<!--                        <com.facebook.shimmer.ShimmerFrameLayout-->
-<!--                            android:id="@+id/postshimmer"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="match_parent"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:orientation="vertical"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"-->
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/postshimmer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
 
-<!--                            shimmer:duration="800">-->
+                            shimmer:duration="800">
 
-<!--                            &lt;!&ndash; Adding 3 rows of placeholders &ndash;&gt;-->
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:orientation="vertical">-->
+                            <!-- Adding 3 rows of placeholders -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
 
-<!--                                <include layout="@layout/shimer" />-->
+                                <include layout="@layout/shimer" />
 
-<!--&lt;!&ndash;                                <include layout="@layout/shimer" />&ndash;&gt;-->
-
-
+                                <!--                                <include layout="@layout/shimer" />-->
 
 
 
 
-<!--                            </LinearLayout>-->
 
-<!--                        </com.facebook.shimmer.ShimmerFrameLayout>-->
+
+                            </LinearLayout>
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
                         <androidx.recyclerview.widget.RecyclerView
-                            android:background="@color/colorWhite"
+                            android:background="@color/greentheme"
                             android:id="@+id/postsRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -296,13 +296,13 @@ android:background="@color/colorWhite"
 
                     </RelativeLayout>
 
-<!--                    <androidx.recyclerview.widget.RecyclerView-->
-<!--                        android:background="#ece9e6"-->
-<!--                        android:id="@+id/postsRecyclerView"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_below="@id/wokCard"-->
-<!--                        />-->
+                    <!--                    <androidx.recyclerview.widget.RecyclerView-->
+                    <!--                        android:background="#ece9e6"-->
+                    <!--                        android:id="@+id/postsRecyclerView"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:layout_below="@id/wokCard"-->
+                    <!--                        />-->
 
 
                 </LinearLayout>
@@ -345,7 +345,7 @@ android:background="@color/colorWhite"
         android:id="@+id/emptyLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ece9e6"
+        android:background="@color/greentheme"
         android:layout_marginTop="?actionBarSize">
 
 
@@ -359,7 +359,8 @@ android:background="@color/colorWhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_add_a_photo_black_96dp" />
+                android:src="@drawable/ic_add_a_photo_black_96dp"
+                app:tint="@color/colorWhite" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -369,7 +370,7 @@ android:background="@color/colorWhite"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:text="No posts found."
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textColor="@color/fontColor" />
+                android:textColor="@color/colorWhite" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -379,7 +380,7 @@ android:background="@color/colorWhite"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:text="Follow groups of your choice to view them here"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:textColor="@color/fontColor" />
+                android:textColor="@color/colorWhite" />
 
 
         </LinearLayout>
@@ -387,51 +388,51 @@ android:background="@color/colorWhite"
     </RelativeLayout>
 
 
-<!--    <RelativeLayout-->
-<!--        android:visibility="gone"-->
-<!--        android:id="@+id/emptyLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:background="#ece9e6"-->
-<!--        android:layout_marginTop="?actionBarSize">-->
+    <!--    <RelativeLayout-->
+    <!--        android:visibility="gone"-->
+    <!--        android:id="@+id/emptyLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background="#ece9e6"-->
+    <!--        android:layout_marginTop="?actionBarSize">-->
 
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:orientation="vertical">-->
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:gravity="center_vertical"-->
+    <!--            android:orientation="vertical">-->
 
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:src="@drawable/ic_add_a_photo_black_96dp" />-->
+    <!--            <ImageView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_gravity="center"-->
+    <!--                android:src="@drawable/ic_add_a_photo_black_96dp" />-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="@dimen/activity_horizontal_margin"-->
-<!--                android:text="No posts found."-->
-<!--                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"-->
-<!--                android:textColor="@color/fontColor" />-->
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_gravity="center"-->
+    <!--                android:gravity="center"-->
+    <!--                android:padding="@dimen/activity_horizontal_margin"-->
+    <!--                android:text="No posts found."-->
+    <!--                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"-->
+    <!--                android:textColor="@color/fontColor" />-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:gravity="center"-->
-<!--                android:padding="@dimen/activity_horizontal_margin"-->
-<!--                android:text="Follow groups of your choice to view them here"-->
-<!--                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"-->
-<!--                android:textColor="@color/fontColor" />-->
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_gravity="center"-->
+    <!--                android:gravity="center"-->
+    <!--                android:padding="@dimen/activity_horizontal_margin"-->
+    <!--                android:text="Follow groups of your choice to view them here"-->
+    <!--                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"-->
+    <!--                android:textColor="@color/fontColor" />-->
 
 
-<!--        </LinearLayout>-->
+    <!--        </LinearLayout>-->
 
-<!--    </RelativeLayout>-->
+    <!--    </RelativeLayout>-->
 
 
 </FrameLayout>

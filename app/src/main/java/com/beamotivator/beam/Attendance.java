@@ -2,9 +2,13 @@
 package com.beamotivator.beam;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,6 +26,15 @@ public class Attendance extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = this.getWindow();
+            Drawable background = this.getResources().getDrawable(R.drawable.main_gradient);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(this.getResources().getColor(android.R.color.transparent));
+            // window.setNavigationBarColor(this.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+
+        }
         setContentView(R.layout.activity_attendance);
 
         present=findViewById(R.id.checkpresent);

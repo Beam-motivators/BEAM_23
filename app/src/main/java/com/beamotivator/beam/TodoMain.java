@@ -2,8 +2,12 @@ package com.beamotivator.beam;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
@@ -31,8 +35,15 @@ public class TodoMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        setContentView(R.layout.activity_todo_main);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = this.getWindow();
+            Drawable background = this.getResources().getDrawable(R.drawable.main_gradient);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(this.getResources().getColor(android.R.color.transparent));
+            // window.setNavigationBarColor(this.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+
+        }        setContentView(R.layout.activity_todo_main);
 
 
         Toolbar sgTlbr = findViewById(R.id.goalsToolbar);

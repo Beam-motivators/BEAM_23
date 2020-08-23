@@ -3,9 +3,13 @@ package com.beamotivator.beam;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.ValueAnimator;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -20,12 +24,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -49,16 +55,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Objects;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView imageView1, imageView2;
     private ValueAnimator valueAnimator;
     private  static final int RC_SIGN_IN = 100;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-
+      FirebaseUser user1;
     FloatingActionButton signIn;
     ProgressBar progress_bar;
     TextView appversion;
+      AuthCredential credential;
+      AuthCredential credential1;
+    FirebaseAuth firebaseAuth;
+ProgressBar prgresbarlogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,10 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
-           // Drawable background = this.getResources().getDrawable(R.drawable.two);
+            Drawable background = this.getResources().getDrawable(R.drawable.main_gradient);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(this.getResources().getColor(android.R.color.transparent));
-            //window.setNavigationBarColor(this.getResources().getColor(android.R.color.transparent));
+            // window.setNavigationBarColor(this.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
 
         }
 
@@ -77,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         progress_bar = (ProgressBar) findViewById(R.id.progress_bar);
+        prgresbarlogin = (ProgressBar) findViewById(R.id.prgresbarlogin);
+
+
         appversion= findViewById(R.id.appversion);
         String versionName = BuildConfig.VERSION_NAME;
         appversion.setText("BEAM"+versionName);
@@ -106,18 +122,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void firebaseAuthWithGoogle(String idToken) {
-
+    private void firebaseAuthWithGoogle(final String idToken) {
+        prgresbarlogin.setVisibility(View.VISIBLE);
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if (acct != null) {
             final String personName = Objects.requireNonNull(acct.getDisplayName()).trim();
-            String personEmail = acct.getEmail();
+            final String personEmail = acct.getEmail();
             Uri personPhoto = acct.getPhotoUrl();
             final String proPic = Objects.requireNonNull(personPhoto).toString();
             final String name = personName.substring(0, personName.lastIndexOf(" "));
 
 //            if(personEmail.endsWith("christuniverstiy.in")) {
-            AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+              credential = GoogleAuthProvider.getCredential(idToken, null);
             mAuth.signInWithCredential(credential)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -148,13 +164,102 @@ public class MainActivity extends AppCompatActivity {
                                 reference.child(uid).setValue(hashMap);
 
                                 //goto profile activity after logging in
-                                startActivity(new Intent(MainActivity.this, DashboardActivity.class));
-                                finish();
+
+                                String search  = "jibincherian892";
+
+                                if ( user.getEmail().toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
+
+                                    System.out.println("I found the keyword");
+                                    prgresbarlogin.setVisibility(View.INVISIBLE);
+
+                                    startActivity(new Intent(MainActivity.this, DashboardActivity.class));
+                                    finish();
+
+                                } else {
+
+                                    System.out.println("not found");
+                                    prgresbarlogin.setVisibility(View.INVISIBLE);
+                                    loaddilog();
+
+                                }
+
+
+
+
+
 
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
                             }
+                        }
+
+                        private void loaddilog() {
+
+
+
+
+                            final Dialog dialog = new Dialog(MainActivity.this);
+                            dialog.setCancelable(false);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                            dialog.setContentView(R.layout.dialog_dark);
+                            dialog.setCancelable(true);
+
+                            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                            lp.copyFrom(dialog.getWindow().getAttributes());
+                            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                            ImageView imageView=dialog.findViewById(R.id.imagenoentry);
+                            TextView textView=dialog.findViewById(R.id.titler);
+                            TextView contentr=dialog.findViewById(R.id.contentr);
+                            TextView statement=dialog.findViewById(R.id.statement);
+
+
+
+
+                            try {
+                Glide.with(MainActivity.this)
+                        .load(proPic)
+                        .centerInside()
+                        .into(imageView);
+            }
+            catch (Exception e) {
+                Toast.makeText(getApplicationContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+                            textView.setText(personName);
+                            contentr.setText(personEmail);
+                            statement.setText(personName+"\n"+"Sorry To Say Your Are Not Abel To Login ");
+
+                            ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    GoogleSignIn.getClient(
+                                            getApplicationContext(),
+                                            new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+                                    ).signOut();
+
+                                            //checkuserstatus();
+                                   dialog.dismiss();
+
+
+
+
+                                }
+                            });
+
+
+
+                            dialog.show();
+
+                            dialog.getWindow().setAttributes(lp);
+
+
+
+
+
+
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -189,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        valueAnimator.end();
+//        valueAnimator.end();
 
     }
 
@@ -205,5 +310,20 @@ public class MainActivity extends AppCompatActivity {
                 //  Snackbar.make(parent_view, "Login data submitted", Snackbar.LENGTH_SHORT).show();
             }
         }, 1000);
+    }
+    public void checkuserstatus()
+    {
+        //get current user
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user != null){
+            //stay signed in
+            //set email of user
+            //protxt.setText(user.getEmail());
+        }
+        else
+        {
+            mGoogleSignInClient.signOut();
+           //  finish();
+        }
     }
 }

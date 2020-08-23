@@ -15,16 +15,17 @@
         android:layout_height="wrap_content"
         android:text=" Add Text"
         android:drawableStart="@drawable/ic_addtxt"
+        android:drawableTint="@color/colorWhite"
         android:padding="25dp"
         android:textSize="18sp"
         android:fontFamily="@font/poppins"
         android:layout_marginStart="20dp"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorWhite"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#f1f1f1"/>
+        android:background="@color/greentheme"/>
 
     <TextView
         android:id="@+id/add_post_image"
@@ -32,11 +33,12 @@
         android:layout_height="wrap_content"
         android:text=" Add Image"
         android:drawableStart="@drawable/ic_addimg"
+        android:drawableTint="@color/colorWhite"
         android:padding="25dp"
         android:textSize="18sp"
         android:fontFamily="@font/poppins"
         android:layout_marginStart="20dp"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorWhite"/>
 
 
 

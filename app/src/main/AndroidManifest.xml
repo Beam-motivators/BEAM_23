@@ -19,6 +19,8 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".AddModifyTask" />
         <activity android:name=".AddPostActivity" />
+        <activity android:name=".View_Poast"/>
+        <activity android:name=".View_Post"/>
         <activity android:name=".Attendance" />
         <activity android:name=".BottomProfileActivity" />
         <activity android:name=".CropImages" />

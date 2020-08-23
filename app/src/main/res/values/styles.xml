@@ -15,4 +15,10 @@
         <item name="colorPrimary">@color/bluetheme</item>
         <item name="colorAccent">@color/bluetheme</item>
     </style>
+
+
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
 </resources>

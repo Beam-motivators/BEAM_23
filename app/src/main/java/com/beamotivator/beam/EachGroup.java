@@ -122,7 +122,7 @@ public class EachGroup extends AppCompatActivity {
                      * change text like to liked */
                     //holder.likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.thumb_up_24px_fill, 0,0,0);
                     follow.setText("Following");
-                    follow.setBackgroundResource(R.drawable.following);
+                    follow.setBackgroundResource(R.drawable.bg_gradient);
 
 
                 }
@@ -130,7 +130,7 @@ public class EachGroup extends AppCompatActivity {
                     //user not liked this post
                     // holder.likeBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.thumb_up_24px, 0,0,0);
                     follow.setText("Follow");
-                    follow.setBackgroundResource(R.drawable.follow);
+                    follow.setBackgroundResource(R.drawable.bg_strock_corner_5);
 
                 }
             }

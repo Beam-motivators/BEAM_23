@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/greentheme"
     android:layout_height="match_parent"
     tools:context=".SavedPost">
 
@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="@drawable/main_gradient"
+        app:titleTextColor="@color/colorWhite"
         app:title="Saved Post">
 
 
@@ -22,6 +23,7 @@
         android:id="@+id/savedRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/greentheme"
         android:layout_below="@+id/savedPostTlbr"
         android:layout_marginTop="1dp" />
 

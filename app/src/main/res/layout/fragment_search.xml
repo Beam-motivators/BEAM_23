@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/greentheme"
     android:layout_height="match_parent"
     tools:context=".fragments.SearchFragment">
 
@@ -22,12 +22,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:background="@drawable/input_field"
+                android:background="@drawable/bg_white_corner_15"
+                   android:backgroundTint="@color/colorPrimaryDark"
                 android:drawableEnd="@drawable/ic_search"
+                android:drawableTint="@color/colorWhite"
                 android:hint="Search name or group"
                 android:padding="10dp"
                 android:singleLine="true"
-                android:textColorHint="#253A4B" />
+                android:textColorHint="@color/colorWhite" />
 
         </Toolbar>
 
@@ -35,8 +37,10 @@
             android:id="@+id/searchTabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/greentheme"
+            app:tabTextColor="@color/colorWhite"
             android:layout_below="@id/searchToolbar"
-            app:tabIndicatorColor="@color/primaryblue">
+            app:tabIndicatorColor="@color/colorWhite">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/userTab"
@@ -64,7 +68,7 @@
             android:id="@+id/search_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:background="@color/greentheme"
             android:layout_below="@+id/searchTabs"
             />
 
