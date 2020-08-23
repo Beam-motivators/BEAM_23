@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
 
     android:background="@drawable/button"
-    android:backgroundTint="@color/colorWhite"
+    android:backgroundTint="@color/colorBlack"
     android:orientation="vertical">
 
     <LinearLayout
@@ -23,7 +23,7 @@
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/colorBlack"
+            android:tint="@color/colorWhite"
             app:srcCompat="@drawable/ic_baseline_close_24" />
 
     </LinearLayout>
@@ -51,7 +51,7 @@
             android:layout_marginTop="@dimen/spacing_large"
             android:text="People name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textStyle="bold" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:text=" short_lorem_ipsum"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/colorWhite" />
 
     </LinearLayout>
     <TextView
@@ -77,7 +77,7 @@
         android:text=" NOTE"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorWhite" />
 
     <TextView
         android:id="@+id/statement"

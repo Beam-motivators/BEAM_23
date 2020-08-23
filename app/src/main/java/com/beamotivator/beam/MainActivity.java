@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -75,15 +76,13 @@ ProgressBar prgresbarlogin;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = this.getWindow();
-            Drawable background = this.getResources().getDrawable(R.drawable.main_gradient);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(this.getResources().getColor(android.R.color.transparent));
-            // window.setNavigationBarColor(this.getResources().getColor(android.R.color.transparent));
-            window.setBackgroundDrawable(background);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            getWindow().setStatusBarColor(getColor(android.R.color.white));
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getWindow().setStatusBarColor(Color.BLACK);
+            }
         }
 
         setContentView(R.layout.activity_main);
@@ -165,7 +164,7 @@ ProgressBar prgresbarlogin;
 
                                 //goto profile activity after logging in
 
-                                String search  = ".com";
+                                String search  = "christ.in";
 
                                 if ( user.getEmail().toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
 
@@ -200,10 +199,9 @@ ProgressBar prgresbarlogin;
 
 
                             final Dialog dialog = new Dialog(MainActivity.this);
-                            dialog.setCancelable(false);
-                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
                             dialog.setContentView(R.layout.dialog_dark);
-                            dialog.setCancelable(true);
+                            dialog.setCancelable(false);
 
                             WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
                             lp.copyFrom(dialog.getWindow().getAttributes());
