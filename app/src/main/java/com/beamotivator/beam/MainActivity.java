@@ -165,7 +165,7 @@ ProgressBar prgresbarlogin;
 
                                 //goto profile activity after logging in
 
-                                String search  = "jibincherian892";
+                                String search  = ".com";
 
                                 if ( user.getEmail().toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
 
