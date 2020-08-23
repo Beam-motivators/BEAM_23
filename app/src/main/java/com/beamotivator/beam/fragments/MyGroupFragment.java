@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -115,9 +116,10 @@ public class MyGroupFragment extends Fragment {
     }
 
     private void loadMyGroups() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
-         groupsRv.setLayoutManager(layoutManager);
-
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+//         groupsRv.setLayoutManager(layoutManager);
+        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(),2);
+        groupsRv.setLayoutManager(layoutManager1);
 
 
         DatabaseReference ref =  FirebaseDatabase.getInstance().getReference("Groups");

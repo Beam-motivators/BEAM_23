@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -278,11 +279,9 @@ public class SearchFragment extends Fragment {
 
 
         private void searchGroup(final String query) {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
-            //layoutManager.setReverseLayout(true);
-            //layoutManager.setStackFromEnd(true);
+            GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(),2);
+            groupsRv.setLayoutManager(layoutManager1);
 
-            groupsRv.setLayoutManager(layoutManager);
             //get current user
             //final FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
 
