@@ -38,8 +38,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="2dp"
-            android:backgroundTint="@color/colorWhite"
-            android:background="@drawable/logo_blue_color" />
+            android:background="@drawable/logo_blue_color"
+            />
 
         <TextView
             android:layout_width="match_parent"

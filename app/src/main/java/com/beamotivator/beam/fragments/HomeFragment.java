@@ -440,11 +440,15 @@ load();
 
 
 
+
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });
+                  //  Toast.makeText(getContext(), ""+postList.size(), Toast.LENGTH_SHORT).show();
+
 
 
                 }
@@ -556,4 +560,7 @@ load();
         drawer.closeDrawer(Gravity.LEFT);
 
     }
+
+
+
 }

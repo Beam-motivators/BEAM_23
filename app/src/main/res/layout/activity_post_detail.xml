@@ -124,7 +124,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/poppins_light"
                             android:text="1.2 Likes"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold" />
 
                         <TextView
@@ -135,7 +135,7 @@
                             android:fontFamily="@font/poppins_light"
                             android:text="1.2 Comments"
                             android:textAlignment="textEnd"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/colorBlack"
                             android:textStyle="bold" />
                     </LinearLayout>
 

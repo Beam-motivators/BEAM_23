@@ -66,7 +66,7 @@
                         android:id="@+id/navigationname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Betty L"
+                        android:text=""
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         android:textColor="@color/colorBlack"
                         app:fontFamily="sans-serif-medium" />
@@ -75,20 +75,12 @@
                         android:id="@+id/navigationemail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="betty.l@mail.com"
+                        android:text=""
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                         android:textColor="@color/colorBlack"
                         app:fontFamily="sans-serif-medium" />
 
-                    <ProgressBar
-                        android:id="@+id/progress"
-                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="90dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:indeterminate="false"
-                        android:max="100"
-                        android:progress="40" />
+
 
                 </LinearLayout>
 
@@ -138,7 +130,6 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_marginTop="@dimen/padding_10"
-                android:onClick="onClick"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:focusable="true">
@@ -167,12 +158,12 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/personalInfo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_xmlarge"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_marginTop="@dimen/padding_10"
-                android:onClick="onClick"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:focusable="true">
@@ -241,7 +232,6 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_marginTop="@dimen/padding_10"
-                android:onClick="onClick"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:focusable="true">
@@ -278,7 +268,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center_vertical"
-                android:onClick="onClick"
                 android:orientation="horizontal">
 
                 <View
@@ -313,7 +302,6 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_marginTop="@dimen/padding_10"
-                android:onClick="onClick"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:focusable="true">

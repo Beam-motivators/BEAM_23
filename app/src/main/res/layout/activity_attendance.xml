@@ -145,7 +145,6 @@
             android:background="@drawable/button"
             android:textStyle="bold"
             android:fontFamily="@font/poppins_bold"
-            android:onClick="checkAttendance"
             android:padding="10dp"
             android:paddingHorizontal="70dp"
             android:paddingVertical="15dp"

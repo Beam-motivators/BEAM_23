@@ -111,7 +111,7 @@ ProgressBar prgresbarlogin;
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchAction();
+                //searchAction();
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
@@ -126,73 +126,47 @@ ProgressBar prgresbarlogin;
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if (acct != null) {
             final String personName = Objects.requireNonNull(acct.getDisplayName()).trim();
-            final String personEmail = acct.getEmail();
+            final String personEmail = acct.getEmail().trim();
             Uri personPhoto = acct.getPhotoUrl();
             final String proPic = Objects.requireNonNull(personPhoto).toString();
             final String name = personName.substring(0, personName.lastIndexOf(" "));
+            if(personEmail.endsWith("christuniversity.in")) {
+                credential = GoogleAuthProvider.getCredential(idToken, null);
+                mAuth.signInWithCredential(credential)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    prgresbarlogin.setVisibility(View.GONE);
+                                    FirebaseUser user = mAuth.getCurrentUser();
 
-//            if(personEmail.endsWith("christuniverstiy.in")) {
-              credential = GoogleAuthProvider.getCredential(idToken, null);
-            mAuth.signInWithCredential(credential)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
+                                    //Get user email and id from auth
+                                    String email = Objects.requireNonNull(user).getEmail();
+                                    String uid = user.getUid();
 
-                                //Get user email and id from auth
-                                String email = Objects.requireNonNull(user).getEmail();
-                                String uid = user.getUid();
+                                    //When user registers store data in firebase database using hashmap
+                                    HashMap<Object, String> hashMap = new HashMap<>();
+                                    //put info to hashmap
+                                    hashMap.putIfAbsent("email", email);
+                                    hashMap.putIfAbsent("uid", uid);
+                                    hashMap.putIfAbsent("name", name);
+                                    hashMap.putIfAbsent("image", proPic);
 
-                                //When user registers store data in firebase database using hashmap
-                                HashMap<Object, String> hashMap = new HashMap<>();
-                                //put info to hashmap
-                                hashMap.putIfAbsent("email", email);
-                                hashMap.putIfAbsent("uid", uid);
-                                hashMap.putIfAbsent("name", name);
-                                hashMap.putIfAbsent("image", proPic);
+                                    //Firebase database instance
+                                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
-                                //Firebase database instance
-                                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                    //Add path to store data "Users"
+                                    DatabaseReference reference = firebaseDatabase.getReference("Users");
 
-                                //Add path to store data "Users"
-                                DatabaseReference reference = firebaseDatabase.getReference("Users");
+                                    //put data within hashmap in database
+                                    reference.child(uid).setValue(hashMap);
 
-                                //put data within hashmap in database
-                                reference.child(uid).setValue(hashMap);
+                                    //goto profile activity after logging in
+                                    startActivity(new Intent(MainActivity.this, Splash.class));
 
-                                //goto profile activity after logging in
-
-                        //        String search  = "christ.in";
-//
-//                                if ( user.getEmail().toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
-//
-//                                    System.out.println("I found the keyword");
-//                                    prgresbarlogin.setVisibility(View.INVISIBLE);
-//
-//                                    startActivity(new Intent(MainActivity.this, DashboardActivity.class));
-//                                    finish();
-//
-//                                } else {
-//
-//                                    System.out.println("not found");
-//                                    prgresbarlogin.setVisibility(View.INVISIBLE);
-//
-//
-//                                }
-
-
-
-
-
-
-//                            } else {
-//                                loaddilog();
-//                                // If sign in fails, display a message to the user.
-//                                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
 
 //                        private void loaddilog() {
 //
@@ -260,12 +234,18 @@ ProgressBar prgresbarlogin;
 //
 //
 //                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(MainActivity.this, "Error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, "Error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            else {
+                prgresbarlogin.setVisibility(View.GONE);
+                mGoogleSignInClient.signOut();
+                Toast.makeText(this, "Not a valid Christ account"+personEmail, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

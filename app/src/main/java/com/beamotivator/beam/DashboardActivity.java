@@ -318,7 +318,7 @@ public class    DashboardActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
         onBackPressed();
         return super.onSupportNavigateUp();
     }
@@ -359,7 +359,7 @@ public class    DashboardActivity extends AppCompatActivity {
     }
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        Toast.makeText(this, "ho", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "ho", Toast.LENGTH_SHORT).show();
          finish();
     }
 

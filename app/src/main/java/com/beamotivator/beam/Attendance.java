@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 
 public class Attendance extends AppCompatActivity {
 
@@ -43,14 +45,46 @@ public class Attendance extends AppCompatActivity {
         attendancecheck=findViewById(R.id.acheck);
         attendanceresult=findViewById(R.id.aresult);
 
+        attendancecheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!TextUtils.isEmpty(present.getText().toString().trim()))
+                {
+                    if(!TextUtils.isEmpty(total.getText().toString().trim()))
+                    {
+                        if(!TextUtils.isEmpty(percentage.getText().toString().trim()))
+                        {
+                            checkAttendance();
+                        }
+                        else
+                        {
+                            Toast.makeText(Attendance.this, "Input field empty", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(Attendance.this, "Input field empty", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+                else
+                    {
+
+                        Toast.makeText(Attendance.this, "Input field empty", Toast.LENGTH_SHORT).show();
+
+
+                    }
+            }
+        });
+
 
     }
 
-    public void checkAttendance(View v){
+    public void checkAttendance(){
 
-        presentc = Float.valueOf(present.getText().toString());
-        totalc = Float.valueOf(total.getText().toString());
-        percentagec = Float.valueOf(percentage.getText().toString());
+        presentc = Float.parseFloat(present.getText().toString().trim());
+        totalc = Float.parseFloat(total.getText().toString().trim());
+        percentagec = Float.parseFloat(percentage.getText().toString().trim());
         perc=percentagec/100;
         currentpercentage=(presentc/totalc)*100;
         if (presentc!=0.0f && totalc!=0.0f && percentagec!=0.0f) {
