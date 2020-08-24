@@ -32,7 +32,7 @@
                     android:layout_gravity="center"
                     android:alpha="0.15"
                     android:backgroundTint="@color/colorPrimaryDark"
-                    android:background="@drawable/tea_cup" />
+                    android:background="@drawable/logo_blue_color" />
 
                 <ImageView
                     android:layout_width="175dp"
@@ -40,7 +40,7 @@
                     android:layout_gravity="center"
                     android:padding="10dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/tea_cup" />
+                    android:src="@drawable/logo_blue_color" />
 
             </FrameLayout>
 

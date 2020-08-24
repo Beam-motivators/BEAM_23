@@ -32,6 +32,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="vertical">
 
             <LinearLayout
@@ -51,7 +52,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginTop="-36dp"
-                    android:src="@drawable/tea_cup"
+                    android:src="@drawable/logo_blue_color"
                     />
 
                 <LinearLayout
@@ -67,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:text="Betty L"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         app:fontFamily="sans-serif-medium" />
 
                     <TextView
@@ -76,7 +77,7 @@
                         android:layout_height="wrap_content"
                         android:text="betty.l@mail.com"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         app:fontFamily="sans-serif-medium" />
 
                     <ProgressBar
@@ -111,7 +112,7 @@
                     android:layout_width="@dimen/spacing_xmlarge"
                     android:layout_height="@dimen/spacing_xmlarge"
                     android:background="@android:color/transparent"
-                    android:tint="@color/colorWhite"
+                    android:tint="@color/colorBlack"
                     app:srcCompat="@drawable/ic_home" />
 
                 <View
@@ -122,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:text="Set Goals"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     app:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
@@ -149,7 +150,7 @@
                     android:layout_width="@dimen/spacing_xmlarge"
                     android:layout_height="@dimen/spacing_xmlarge"
                     android:background="@android:color/transparent"
-                    android:tint="@color/colorWhite"
+                    android:tint="@color/colorBlack"
                     app:srcCompat="@drawable/ic_home" />
 
                 <View
@@ -160,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:text="Bunk Check"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     app:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
@@ -183,7 +184,7 @@
                     android:layout_width="@dimen/spacing_xmlarge"
                     android:layout_height="@dimen/spacing_xmlarge"
                     android:background="@android:color/transparent"
-                    android:tint="@color/colorWhite"
+                    android:tint="@color/colorBlack"
                     app:srcCompat="@drawable/ic_home" />
 
                 <View
@@ -192,47 +193,47 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Personal Info"
+                    android:text="My Profile"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     app:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/saved_Posts"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_xmlarge"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_marginTop="@dimen/padding_10"
-                android:onClick="onClick"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:focusable="true">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/saved_Posts"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/spacing_xmlarge"-->
+<!--                android:background="?attr/selectableItemBackground"-->
+<!--                android:clickable="true"-->
+<!--                android:layout_marginTop="@dimen/padding_10"-->
+<!--                android:onClick="onClick"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:focusable="true">-->
 
-                <View
-                    android:layout_width="20dp"
-                    android:layout_height="0dp" />
-                <ImageButton
-                    android:layout_width="@dimen/spacing_xmlarge"
-                    android:layout_height="@dimen/spacing_xmlarge"
-                    android:background="@android:color/transparent"
-                    android:tint="@color/colorWhite"
-                    app:srcCompat="@drawable/ic_saved" />
+<!--                <View-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="0dp" />-->
+<!--                <ImageButton-->
+<!--                    android:layout_width="@dimen/spacing_xmlarge"-->
+<!--                    android:layout_height="@dimen/spacing_xmlarge"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    android:tint="@color/colorBlack"-->
+<!--                    app:srcCompat="@drawable/ic_saved" />-->
 
-                <View
-                    android:layout_width="5dp"
-                    android:layout_height="0dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Saved Posts"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/colorWhite"
-                    app:fontFamily="sans-serif-medium" />
+<!--                <View-->
+<!--                    android:layout_width="5dp"-->
+<!--                    android:layout_height="0dp" />-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Saved Posts"-->
+<!--                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"-->
+<!--                    android:textColor="@color/colorBlack"-->
+<!--                    app:fontFamily="sans-serif-medium" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
             <LinearLayout
                 android:id="@+id/menuSuggestions"
                 android:layout_width="match_parent"
@@ -252,7 +253,7 @@
                     android:layout_width="@dimen/spacing_xmlarge"
                     android:layout_height="@dimen/spacing_xmlarge"
                     android:background="@android:color/transparent"
-                    android:tint="@color/colorWhite"
+                    android:tint="@color/colorBlack"
                     app:srcCompat="@drawable/ic_home" />
 
                 <View
@@ -263,7 +264,7 @@
                     android:layout_height="wrap_content"
                     android:text="Suggestions"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     app:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
@@ -288,7 +289,7 @@
                     android:layout_width="@dimen/spacing_xmlarge"
                     android:layout_height="@dimen/spacing_xmlarge"
                     android:background="@android:color/transparent"
-                    android:tint="@color/colorWhite"
+                    android:tint="@color/colorBlack"
                     app:srcCompat="@drawable/ic_home" />
 
                 <View
@@ -300,7 +301,7 @@
                     android:layout_height="wrap_content"
                     android:text="About us"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     app:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
@@ -324,7 +325,7 @@
                     android:layout_width="@dimen/spacing_xmlarge"
                     android:layout_height="@dimen/spacing_xmlarge"
                     android:background="@android:color/transparent"
-                    android:tint="@color/colorWhite"
+                    android:tint="@color/colorBlack"
                     app:srcCompat="@drawable/ic_logout" />
 
                 <View
@@ -335,7 +336,7 @@
                     android:layout_height="wrap_content"
                     android:text="Logout"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     app:fontFamily="sans-serif-medium" />
 
             </LinearLayout>

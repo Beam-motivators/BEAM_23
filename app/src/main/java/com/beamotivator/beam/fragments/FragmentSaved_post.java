@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -64,7 +66,7 @@ public class FragmentSaved_post extends Fragment {
 
         postList = new ArrayList<>();
 
-        loadSavedPosts();
+       // loadSavedPosts();
 
 
 
@@ -120,8 +122,12 @@ public class FragmentSaved_post extends Fragment {
                                         //set adapter to recycler view
 
                                         savedPostsRv.setAdapter(adapterPosts);
-
                                         }
+                                    SharedPreferences pC = requireContext().getSharedPreferences("count",MODE_PRIVATE);
+                                    SharedPreferences.Editor pcc = pC.edit();
+                                    pcc.putInt("size",postList.size());
+                                    pcc.apply();
+                                    //Toast.makeText(getContext(), ""+postList.size(), Toast.LENGTH_SHORT).show();
 
 
 
@@ -143,10 +149,25 @@ public class FragmentSaved_post extends Fragment {
 
             }
         });
+//
+//        int count = 0;
+//        if(savedPostsRv.getAdapter().getItemCount() != 0)
+//        {
+//            count = savedPostsRv.getAdapter().getItemCount();
+//            Toast.makeText(getContext(), ""+count, Toast.LENGTH_SHORT).show();
+//        }
+//        else
+//        {
+//            Toast.makeText(getContext(), "Poda", Toast.LENGTH_SHORT).show();
+//        }
+//        Toast.makeText(getContext(), ""+ Objects.requireNonNull(savedPostsRv.getAdapter()).getItemCount(), Toast.LENGTH_SHORT).show();
 
     }
 
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadSavedPosts();
+    }
 }
 

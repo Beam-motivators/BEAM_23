@@ -44,7 +44,7 @@
                         android:layout_width="112dp"
                         android:layout_height="114dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/tea_cup" />
+                        android:src="@drawable/logo_blue_color" />
 
                     <View
                         android:layout_width="@dimen/spacing_large"
@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:text=""
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                            android:textColor="@color/colorWhite" />
+                            android:textColor="@color/colorBlack" />
 
 
                     </LinearLayout>
@@ -92,7 +92,7 @@
                         android:letterSpacing="0.05"
                         android:textAllCaps="false"
                         android:background="@drawable/button"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:textSize="13sp"
                         android:textStyle="bold"
                         tools:text="Follow">
@@ -106,9 +106,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="center"
-                    android:background="@color/colorBlack"
+                    android:background="@color/colorWhite"
                     android:paddingRight="@dimen/spacing_large"
-                    app:tabTextColor="@color/colorWhite"
+                    app:tabTextColor="@color/colorBlack"
                     app:tabGravity="fill"
                     app:tabIndicatorColor="@color/bluetheme"
                     app:tabIndicatorHeight="3dp"

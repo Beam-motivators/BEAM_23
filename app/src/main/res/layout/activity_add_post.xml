@@ -21,7 +21,9 @@
                 android:layout_height="55dp"
                 android:gravity="center"
                 android:text="Upload post"
-                android:textColor="@color/colorWhite" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
 
         </RelativeLayout>
 
@@ -83,10 +85,9 @@
                         android:hint="Write caption.."
                         android:maxLength="175"
                         android:padding="10dp"
-                        android:textColor="@color/colorWhite"
-                        android:textColorHint="@color/colorWhite"
-                        android:textSize="12dp"
-                          />
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#FFFFFF"
+                        android:textSize="12dp" />
 
 
 
@@ -115,14 +116,14 @@
                     android:fontFamily="@font/poppins_light"
                     android:gravity="center"
                     android:text="Choose group"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorBlack" />
 
                 <ImageButton
                     android:id="@+id/dropIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_droparrow"
-                    android:tint="@color/colorWhite"
+                    android:tint="@color/colorBlack"
                     android:background="@null"
                     android:padding="10dp"/>
 
@@ -144,7 +145,7 @@
                 android:layout_marginTop="3dp"
                 android:gravity="end"
                 android:text="175"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorBlack" />
 
             <Button
                 android:id="@+id/postBtn"
@@ -156,7 +157,7 @@
                 android:letterSpacing="0.1"
                 android:text="publish"
                 android:textAllCaps="true"
-                android:textColor="@color/colorWhite"
+                android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
             <TextView
@@ -168,7 +169,7 @@
                 android:fontFamily="@font/poppins_light"
                 android:gravity="center"
                 android:text=" *Please stick to posting relevant information\n*This step of yours is for the betterment of all"
-                 android:textColor="@color/colorWhite"
+                 android:textColor="@color/colorBlack"
                 android:textSize="12sp" />
 
 

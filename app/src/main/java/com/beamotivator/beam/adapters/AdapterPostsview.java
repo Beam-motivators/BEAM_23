@@ -163,18 +163,17 @@ public class AdapterPostsview extends RecyclerView.Adapter<AdapterPostsview.MyHo
             public void onClick(View v) {
 
 
-
                 Intent intent = new Intent(context, View_Post.class);
                 intent.putExtra("uid",uid);
+                intent.putExtra("position",i);
                 SharedPreferences sh=context.getSharedPreferences("posts",MODE_PRIVATE);
                 SharedPreferences.Editor ee=sh.edit();
                 ee.putString("uid",uid);
                 ee.putInt("choice",1);
                 ee.putInt("position",i);
-                ee.apply();
+                ee.commit();
 
                 context.startActivity(intent);
-
 
 
             }

@@ -28,7 +28,7 @@ android:background="@color/greentheme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                     tools:src="@drawable/tea_cup"
+                     tools:src="@drawable/logo_blue_color"
 
                     />
 
@@ -75,7 +75,7 @@ android:background="@color/greentheme"
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="match_parent"-->
 <!--                android:scaleType="centerCrop"-->
-<!--                android:src="@drawable/tea_cup"-->
+<!--                android:src="@drawable/logo_blue_color"-->
 <!--                />-->
 
 <!--            <LinearLayout-->
@@ -123,7 +123,7 @@ android:background="@color/greentheme"
 <!--    &lt;!&ndash;            android:layout_width="150dp"&ndash;&gt;-->
 <!--    &lt;!&ndash;            android:layout_height="200dp"&ndash;&gt;-->
 <!--    &lt;!&ndash;            android:layout_gravity="center_vertical"&ndash;&gt;-->
-<!--    &lt;!&ndash;             android:src="@drawable/tea_cup" />&ndash;&gt;-->
+<!--    &lt;!&ndash;             android:src="@drawable/logo_blue_color" />&ndash;&gt;-->
 
 
 <!--    &lt;!&ndash;    </LinearLayout>&ndash;&gt;-->

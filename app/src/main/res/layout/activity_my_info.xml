@@ -125,7 +125,7 @@
         android:id="@+id/updateBtn"
         android:textStyle="bold"
         android:text="UPDATE"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button"

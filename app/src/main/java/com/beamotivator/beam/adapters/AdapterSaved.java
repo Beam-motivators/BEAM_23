@@ -158,6 +158,8 @@ public class AdapterSaved extends RecyclerView.Adapter<AdapterSaved.MyHolder> {
             }
         });
 
+
+
         myHolder.image_furniture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

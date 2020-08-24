@@ -17,9 +17,6 @@
         android:icon="@drawable/personalinfo"
         />
 
-    <item android:id="@+id/saved_Posts"
-        android:title="Saved Posts"
-        android:icon="@drawable/ic_saved"/>
 
     <item android:title="Others">
         <menu>

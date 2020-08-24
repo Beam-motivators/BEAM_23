@@ -13,7 +13,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:layout_height="?android:actionBarSize"
         android:background="@drawable/main_gradient"
-        app:titleTextColor="@color/colorWhite"
+        app:titleTextColor="@color/colorBlack"
         />
 
     <RelativeLayout
@@ -28,8 +28,8 @@
             android:id="@+id/suggestionTIL"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:textColorHint="@color/colorWhite"
-            app:counterTextColor="@color/colorWhite"
+            android:textColorHint="@color/colorBlack"
+            app:counterTextColor="@color/colorBlack"
             android:hint="Write your suggestions or feedback!"
             app:hintAnimationEnabled="false"
             android:layout_margin="20dp"
@@ -47,8 +47,8 @@
                 android:gravity="top"
                  android:maxLength="175"
                 android:padding="10dp"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"
                 android:textSize="12dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>

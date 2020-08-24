@@ -11,7 +11,7 @@
         android:id="@+id/date_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:calendarTextColor="@color/colorWhite"
+        android:calendarTextColor="@color/colorBlack"
         android:outlineSpotShadowColor="@color/colorWhite"
         android:outlineAmbientShadowColor="@color/colorWhite"
         android:calendarViewShown="false"

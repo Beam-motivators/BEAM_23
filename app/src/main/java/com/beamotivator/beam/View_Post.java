@@ -40,6 +40,7 @@ public class View_Post extends AppCompatActivity {
     String myId ;
     int pos = 0;
     SharedPreferences sh;
+    SharedPreferences pC;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,34 +60,43 @@ public class View_Post extends AppCompatActivity {
         myId = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
 
         sh=  getSharedPreferences("posts",MODE_PRIVATE);
-
+        pC = getSharedPreferences("count",MODE_PRIVATE);
 
   //      Intent intent = getIntent();
 //        int position = Integer.parseInt(Objects.requireNonNull(intent.getStringExtra("position")));
 
         savedPostsRv =  findViewById(R.id.viewpost);
+//        int total = Objects.requireNonNull(savedPostsRv.getAdapter()).getItemCount();
         postList = new ArrayList<>();
 
-        int choice = sh.getInt("choice",0);
+        Intent pintent = getIntent();
 
-        Toast.makeText(this, ""+choice, Toast.LENGTH_SHORT).show();
+        int choice = sh.getInt("choice",3);
+        int position = sh.getInt("position",0);
+        int length = pC.getInt("size",0);
+        int plength = pC.getInt("pSize",0);
+
+        int total = length - position;
+       // Toast.makeText(this, ""+choice, Toast.LENGTH_SHORT).show();
+
+       // Toast.makeText(this, ""+total, Toast.LENGTH_SHORT).show();
 
         switch (choice)
         {
             case 1:
-                loadMyPosts();
+                loadMyPosts(choice);
                 break;
             case 2:
-                loadSavedPosts();
+                loadSavedPosts(total);
                 break;
 
         }
 
     }
 
-    private void loadSavedPosts() {
+    private void loadSavedPosts(final int element) {
 
-        Toast.makeText(this, ""+sh.getInt("position",0), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, ""+sh.getInt("position",0), Toast.LENGTH_SHORT).show();
         //linear layout for recyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(View_Post.this);
 
@@ -103,7 +113,7 @@ public class View_Post extends AppCompatActivity {
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Extras").child(myId).child("Saved");
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.limitToLast(element).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 postList.clear();
@@ -135,6 +145,7 @@ public class View_Post extends AppCompatActivity {
 
                                         //set adapter to recycler view
                                         savedPostsRv.setAdapter(adapterPosts);
+
                                          }
 
 
@@ -157,10 +168,9 @@ public class View_Post extends AppCompatActivity {
             }
         });
 
+        }
 
-    }
-
-    private void loadMyPosts() {
+    private void loadMyPosts(int choice) {
 
         //linear layout for recyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -170,15 +180,18 @@ public class View_Post extends AppCompatActivity {
         layoutManager.setReverseLayout(false);
         savedPostsRv.setLayoutManager(layoutManager);
 
+        Toast.makeText(this, ""+3, Toast.LENGTH_LONG).show();
+
         //set this layout to recycler view
 
-        Toast.makeText(this, ""+postList.size(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ""+postList.size(), Toast.LENGTH_SHORT).show();
 
         myId = firebaseAuth.getCurrentUser().getUid();
 
         //now check for the post details
         DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Posts");
         ref1.orderByChild("uid")
+//                .limitToLast(ele)
                 .equalTo(sh.getString("uid",null))
                 .addValueEventListener(new ValueEventListener() {
             @Override
@@ -222,6 +235,8 @@ public class View_Post extends AppCompatActivity {
         e.clear();
         e.apply();
         finish();
+
+
     }
 }
 

@@ -164,101 +164,102 @@ ProgressBar prgresbarlogin;
 
                                 //goto profile activity after logging in
 
-                                String search  = "christ.in";
-
-                                if ( user.getEmail().toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
-
-                                    System.out.println("I found the keyword");
-                                    prgresbarlogin.setVisibility(View.INVISIBLE);
-
-                                    startActivity(new Intent(MainActivity.this, DashboardActivity.class));
-                                    finish();
-
-                                } else {
-
-                                    System.out.println("not found");
-                                    prgresbarlogin.setVisibility(View.INVISIBLE);
-                                    loaddilog();
-
-                                }
-
-
+                        //        String search  = "christ.in";
+//
+//                                if ( user.getEmail().toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
+//
+//                                    System.out.println("I found the keyword");
+//                                    prgresbarlogin.setVisibility(View.INVISIBLE);
+//
+//                                    startActivity(new Intent(MainActivity.this, DashboardActivity.class));
+//                                    finish();
+//
+//                                } else {
+//
+//                                    System.out.println("not found");
+//                                    prgresbarlogin.setVisibility(View.INVISIBLE);
+//
+//
+//                                }
 
 
 
 
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
+
+
+//                            } else {
+//                                loaddilog();
+//                                // If sign in fails, display a message to the user.
+//                                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
                             }
                         }
 
-                        private void loaddilog() {
-
-
-
-
-                            final Dialog dialog = new Dialog(MainActivity.this);
-                             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
-                            dialog.setContentView(R.layout.dialog_dark);
-                            dialog.setCancelable(false);
-
-                            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-                            lp.copyFrom(dialog.getWindow().getAttributes());
-                            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-                            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                            ImageView imageView=dialog.findViewById(R.id.imagenoentry);
-                            TextView textView=dialog.findViewById(R.id.titler);
-                            TextView contentr=dialog.findViewById(R.id.contentr);
-                            TextView statement=dialog.findViewById(R.id.statement);
-
-
-
-
-                            try {
-                Glide.with(MainActivity.this)
-                        .load(proPic)
-                        .centerInside()
-                        .into(imageView);
-            }
-            catch (Exception e) {
-                Toast.makeText(getApplicationContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-                            textView.setText(personName);
-                            contentr.setText(personEmail);
-                            statement.setText(personName+"\n"+"Sorry To Say Your Are Not Abel To Login ");
-
-                            ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                    GoogleSignIn.getClient(
-                                            getApplicationContext(),
-                                            new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
-                                    ).signOut();
-
-                                            //checkuserstatus();
-                                   dialog.dismiss();
-
-
-
-
-                                }
-                            });
-
-
-
-                            dialog.show();
-
-                            dialog.getWindow().setAttributes(lp);
-
-
-
-
-
-
-
-                        }
+//                        private void loaddilog() {
+//
+//
+//
+//
+//                            final Dialog dialog = new Dialog(MainActivity.this);
+//                             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+//                            dialog.setContentView(R.layout.dialog_dark);
+//                            dialog.setCancelable(false);
+//
+//                            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//                            lp.copyFrom(dialog.getWindow().getAttributes());
+//                            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+//                            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//                            ImageView imageView=dialog.findViewById(R.id.imagenoentry);
+//                            TextView textView=dialog.findViewById(R.id.titler);
+//                            TextView contentr=dialog.findViewById(R.id.contentr);
+//                            TextView statement=dialog.findViewById(R.id.statement);
+//
+//
+//
+//
+//                            try {
+//                Glide.with(MainActivity.this)
+//                        .load(proPic)
+//                        .centerInside()
+//                        .into(imageView);
+//            }
+//            catch (Exception e) {
+//                Toast.makeText(getApplicationContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//                            textView.setText(personName);
+//                            contentr.setText(personEmail);
+//                            statement.setText(personName+"\n"+"Sorry To Say Your Are Not Abel To Login ");
+//
+//                            ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//
+//                                    GoogleSignIn.getClient(
+//                                            getApplicationContext(),
+//                                            new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+//                                    ).signOut();
+//
+//                                            //checkuserstatus();
+//                                   dialog.dismiss();
+//
+//
+//
+//
+//                                }
+//                            });
+//
+//
+//
+//                            dialog.show();
+//
+//                            dialog.getWindow().setAttributes(lp);
+//
+//
+//
+//
+//
+//
+//
+//                        }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {

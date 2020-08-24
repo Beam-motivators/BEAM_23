@@ -51,6 +51,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Beam"
+
                     android:fontFamily="@font/poppins_semibold"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
@@ -61,10 +62,12 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
+                    android:backgroundTint="@color/colorWhite"
+
                     android:layout_marginEnd="1dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginRight="1dp"
-                    android:src="@drawable/tea_cup" />
+                    android:src="@drawable/logo_blue_color" />
 
             </LinearLayout>
 
@@ -340,7 +343,7 @@
         android:visibility="gone"/>
 
     <RelativeLayout
-        android:visibility="gone"
+        android:visibility="invisible"
         android:id="@+id/emptyLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -359,7 +362,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_add_a_photo_black_96dp"
-                app:tint="@color/colorWhite" />
+                app:tint="@color/colorBlack" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -369,7 +372,7 @@
                 android:padding="@dimen/activity_horizontal_margin"
                 android:text="No posts found."
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorBlack" />
 
             <TextView
                 android:layout_width="wrap_content"

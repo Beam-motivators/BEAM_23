@@ -38,9 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/greentheme"
-            app:tabTextColor="@color/colorWhite"
+            app:tabTextColor="@color/colorBlack"
             android:layout_below="@id/searchToolbar"
-            app:tabIndicatorColor="@color/colorWhite">
+            app:tabIndicatorColor="@color/colorBlack">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/userTab"

@@ -19,6 +19,7 @@
             android:textSize="18sp"
             android:id="@+id/postTypeTv"
             android:layout_width="match_parent"
+            android:clickable="true"
             android:layout_height="30dp"/>
 
 

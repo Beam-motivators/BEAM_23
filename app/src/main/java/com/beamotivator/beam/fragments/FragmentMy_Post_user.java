@@ -119,6 +119,9 @@ public class FragmentMy_Post_user extends Fragment {
                             //set adapter to recycler view
                             savedPostsRv.setAdapter(adapterPosts);
                         }
+                        SharedPreferences pC = requireContext().getSharedPreferences("count",MODE_PRIVATE);
+                        SharedPreferences.Editor pcc = pC.edit();
+                        pcc.putInt("uSize",postList.size());
 
 
 

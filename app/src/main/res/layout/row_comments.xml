@@ -28,7 +28,7 @@
             android:layout_toEndOf="@id/avatarIv"
             android:fontFamily="@font/poppins"
             android:text="Benson"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
             android:layout_toEndOf="@id/avatarIv"
             android:fontFamily="@font/poppins_semibold"
             android:text="This is the comment"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textStyle="bold" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_toRightOf="@id/avatarIv"
             android:fontFamily="@font/poppins_light"
             android:text="21/06/2020"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorBlack" />
     </RelativeLayout>
 
 </LinearLayout>

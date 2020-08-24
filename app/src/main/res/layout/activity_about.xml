@@ -39,14 +39,14 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="2dp"
             android:backgroundTint="@color/colorWhite"
-            android:background="@drawable/tea_cup" />
+            android:background="@drawable/logo_blue_color" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Together We Achieve"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="8sp" />
 
         <TextView
@@ -57,7 +57,7 @@
             android:inputType="textMultiLine"
             android:text="This is an  initiative by the students for the students\nOur goal is to improve each of us by working together as one"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorBlack" />
 
         <TextView
             android:layout_width="match_parent"

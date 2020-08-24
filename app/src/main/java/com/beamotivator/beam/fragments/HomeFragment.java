@@ -136,14 +136,14 @@ String Uid;
         @SuppressLint("UseCompatLoadingForDrawables") Drawable background = requireActivity().getResources().getDrawable(R.drawable.main_gradient);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getActivity().getResources().getColor(android.R.color.transparent));
-        window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
+        //window.setNavigationBarColor(getActivity().getResources().getColor(android.R.color.transparent));
         window.setBackgroundDrawable(background);
 
         final View view =  inflater.inflate(R.layout.fragment_home, container, false);
 load();
         mShimmerViewContainer = view.findViewById(R.id.postshimmer);
         mShimmerViewContainer.startShimmer();
-             homeimg = view.findViewById(R.id.homeimgfc);
+        homeimg = view.findViewById(R.id.homeimgfc);
         drawer = view.findViewById(R.id.drawer_layout);
 
         navbtn = view.findViewById(R.id.menubt);
@@ -178,7 +178,7 @@ load();
         menuLogout = view.findViewById(R.id.menuLogout);
         setgoals = view.findViewById(R.id.setgoals);
         bunkcheck = view.findViewById(R.id.bunkcheck);
-         saved_Posts = view.findViewById(R.id.saved_Posts);
+//         saved_Posts = view.findViewById(R.id.saved_Posts);
         personalInfo = view.findViewById(R.id.personalInfo);
         menuSuggestions = view.findViewById(R.id.menuSuggestions);
         aboutus = view.findViewById(R.id.aboutus);
@@ -187,35 +187,11 @@ load();
         menuLogout.setOnClickListener(this);
         setgoals.setOnClickListener(this);
         bunkcheck.setOnClickListener(this);
-        saved_Posts.setOnClickListener(this);
+//        saved_Posts.setOnClickListener(this);
         personalInfo.setOnClickListener(this);
         menuSuggestions.setOnClickListener(this);
         aboutus.setOnClickListener(this);
 
-
-
-//        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.activity_main_swipe_refresh_layout);
-//
-//        mSwipeRefreshLayout.setColorSchemeResources(R.color.greentheme, R.color.gray, R.color.bluetheme);
-//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        loadPosts();
-//                        mSwipeRefreshLayout.setRefreshing(false);
-//                    }
-//
-//
-//                }, 2500);
-//            }
-//        });
-//        ConstraintLayout constraintLayout = view.findViewById(R.id.greet_layout);
-//        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-//        animationDrawable.setEnterFadeDuration(2000);
-//        animationDrawable.setExitFadeDuration(2000);
-//        animationDrawable.start();
         firebaseAuth = FirebaseAuth.getInstance();
         myUid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
 
@@ -275,7 +251,7 @@ load();
                                     .into(imagenavigation);
                         }
                         catch (Exception e) {
-                            Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -286,7 +262,7 @@ load();
                                     .into(homeimg);
                         }
                         catch (Exception e) {
-                            Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -551,9 +527,9 @@ load();
                 getActivity();
                 break;
 
-            case R.id.saved_Posts:
-                startActivity(new Intent(getActivity(), SavedPost.class));
-                break;
+//            case R.id.saved_Posts:
+//                startActivity(new Intent(getActivity(), SavedPost.class));
+//                break;
 
             case R.id.personalInfo:
                 Intent prof = new Intent(getActivity(), ThierProfile.class);

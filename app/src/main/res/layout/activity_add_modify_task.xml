@@ -75,9 +75,9 @@
                 android:id="@+id/custom_config"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/greentheme"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:background="@drawable/main_gradient"
+                android:gravity="center"
                 android:onClick="chooseDate"
                 android:orientation="horizontal"
                 android:paddingHorizontal="30dp"
@@ -134,7 +134,6 @@
         </LinearLayout>
 
 
-
         <Button
             android:id="@+id/save_btn"
             style="?android:attr/borderlessButtonStyle"
@@ -142,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:background="@color/greentheme"
+            android:background="@drawable/main_gradient"
             android:onClick="saveTask"
             android:paddingVertical="15dp"
             android:text="SAVE"

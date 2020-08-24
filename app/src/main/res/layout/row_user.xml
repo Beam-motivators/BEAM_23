@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Person Name"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:fontFamily="@font/poppins_light"
                 android:text="Person Email"
                 android:textSize="13sp"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorBlack" />
 
 
         </LinearLayout>

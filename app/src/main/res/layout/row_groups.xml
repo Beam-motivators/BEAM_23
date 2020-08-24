@@ -8,10 +8,16 @@
     android:layout_marginTop="@dimen/padding_10"
     android:layout_marginBottom="@dimen/padding_10"
     android:padding="@dimen/padding_10"
-    app:cardBackgroundColor="@color/colorBlack"
+
+    app:cardBackgroundColor="@color/colorWhite"
       android:layout_height="wrap_content">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
+        android:id="@+id/groupDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
          android:background="@color/greentheme"
@@ -33,7 +39,7 @@
             android:singleLine="true"
             android:text="Group Name"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -45,27 +51,30 @@
             android:inputType="textMultiLine|textCapSentences"
             android:text="Group Description"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorBlack" />
 
 
-        <Button
-            android:id="@+id/openGroupBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_50sdp"
-            android:layout_marginEnd="@dimen/_50sdp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button"
-            android:layout_marginBottom="@dimen/padding_10"
-            android:text="View"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+
 
 
     </LinearLayout>
 
+    <Button
+        android:layout_below="@id/groupDetail"
+        android:id="@+id/openGroupBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_50sdp"
+        android:layout_marginEnd="@dimen/_50sdp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button"
+        android:layout_marginBottom="10dp"
+        android:text="View"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -34,8 +34,8 @@
         android:background="@color/greentheme"
         android:fontFamily="@font/poppins_light"
         android:hint="Group Title"
-        android:textColorHint="@color/colorWhite"
-        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorBlack"
+        android:textColor="@color/colorBlack"
         android:padding="10dp" />
 
     <!--Group Description-->
@@ -48,8 +48,8 @@
         android:background="@color/greentheme"
         android:fontFamily="@font/poppins_light"
         android:gravity="top"
-        android:textColorHint="@color/colorWhite"
-        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorBlack"
+        android:textColor="@color/colorBlack"
         android:hint="Description"
         android:inputType="textMultiLine|textCapSentences"
         android:minHeight="100dp"

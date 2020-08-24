@@ -29,7 +29,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:padding="10dp"
-                    android:src="@drawable/tea_cup" />
+                    android:src="@drawable/logo_blue_color" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                         android:layout_marginTop="16dp"
                         android:text="Sandra Adams"
                         android:fontFamily="@font/poppins_light"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/colorBlack" />
 
                     <TextView
                         android:id="@+id/navemail"

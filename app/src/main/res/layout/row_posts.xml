@@ -53,7 +53,7 @@ android:background="@color/greentheme"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Name"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:textSize="15sp" />
 
                 <TextView
@@ -63,7 +63,7 @@ android:background="@color/greentheme"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="33 mins"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:textSize="10sp" />
             </LinearLayout>
 
@@ -74,7 +74,7 @@ android:background="@color/greentheme"
                 android:layout_gravity="center_vertical"
                 android:background="@null"
                 android:src="@drawable/ic_more"
-                android:tint="@color/colorWhite" />
+                android:tint="@color/colorBlack" />
         </LinearLayout>
 
         <!--        <TextView-->
@@ -97,7 +97,7 @@ android:background="@color/greentheme"
             android:fontFamily="@font/poppins"
             android:padding="5dp"
             android:text="This is the description"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="16sp"
             android:textStyle="bold" />
 <RelativeLayout
@@ -113,7 +113,7 @@ android:background="@color/greentheme"
             android:id="@+id/pImageIv"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:background="@color/colorWhite"
+            android:background="@color/colorBlack"
             android:scaleType="fitXY" />
 
 </RelativeLayout>
@@ -132,7 +132,7 @@ android:background="@color/greentheme"
             android:layout_marginTop="@dimen/padding_10"
             android:paddingBottom="5dp"
             android:text="stamp"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="10sp"
             android:textStyle="bold" />
         <LinearLayout
@@ -147,7 +147,7 @@ android:background="@color/greentheme"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@color/colorWhite"
+                android:background="@color/colorBlack"
                 android:backgroundTint="@color/greentheme"
                 android:drawableStart="@drawable/thumb_up_24px"
                 android:paddingStart="30dp"
@@ -219,7 +219,7 @@ android:background="@color/greentheme"
                 android:paddingLeft="5dp"
                 android:paddingBottom="5dp"
                 android:text="Likes"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -233,7 +233,7 @@ android:background="@color/greentheme"
                 android:paddingBottom="5dp"
                 android:text="Comments"
                 android:textAlignment="textEnd"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>

@@ -505,7 +505,10 @@ else {
     intent.putExtra("uid",uid);
     SharedPreferences sh=context.getSharedPreferences("posts",MODE_PRIVATE);
     SharedPreferences.Editor ee=sh.edit();
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     ee.putString("uid",uid);
+    ee.putInt("position",i);
+    ee.putInt("choice",1);
     ee.apply();
 
     context.startActivity(intent);
@@ -542,6 +545,8 @@ else {
                     if(snapshot.child("Saved").hasChild(pId)){
                         //already like so remove like
                         savedRef.child(myUid).child("Saved").child(pId).removeValue();
+                   //     notifyDataSetChanged();
+
 
                     }
                     else
@@ -1024,6 +1029,8 @@ ProgressBar progressBar;
 
         }
     }
+
+    
     public static Date currentDate() {
         Calendar calendar = Calendar.getInstance();
         return calendar.getTime();

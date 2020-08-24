@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.beamotivator.beam.R;
 import com.beamotivator.beam.models.ModelComment;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -84,9 +85,8 @@ public class AdapterComments extends RecyclerView.Adapter<AdapterComments.MyHold
 
         try
         {
-            Picasso.get()
+            Glide.with(context)
             .load(image)
-            .placeholder(R.drawable.ic_image)
                     .into(myHolder.avatarIv);
         }
         catch(Exception e)
