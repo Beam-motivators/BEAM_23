@@ -905,6 +905,7 @@ else {
         final ProgressDialog pd = new ProgressDialog(context);
         pd.setMessage("Deleting...");
         pd.show();
+        likesRef.child(pId).removeValue();
 
         StorageReference picRef = FirebaseStorage.getInstance().getReferenceFromUrl(pImage);
         picRef.delete()
@@ -914,6 +915,7 @@ else {
 
                         //image deleted now delete from database
                         pd.dismiss();
+
                         Query fquery = FirebaseDatabase.getInstance().getReference("Posts").orderByChild("pId").equalTo(pId);
                         fquery.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -923,6 +925,7 @@ else {
 
                                 }
                                 //deleted
+
                                 Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
 
                             }
@@ -948,6 +951,7 @@ else {
 
         final ProgressDialog pd = new ProgressDialog(context);
         pd.setMessage("Deleting");
+        likesRef.child(pId).removeValue();
         //image deleted now delete from database
         Query fquery = FirebaseDatabase.getInstance().getReference("Posts").orderByChild("pId").equalTo(pId);
         fquery.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -71,16 +71,17 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins"
                                 android:text="Name"
-                                android:textColor="@color/colorWhite"
+                                android:textColor="@color/colorBlack"
                                 android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/pTimeTv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="12sp"
                                 android:fontFamily="@font/poppins_light"
                                 android:text="33 mins"
-                                android:textColor="@color/colorWhite" />
+                                android:textColor="@color/independance" />
                         </LinearLayout>
 
                         <ImageButton
@@ -234,7 +235,7 @@
                 android:padding="2dp"
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_chat"
-                android:textColor="@color/colorWhite"/>
+                android:textColor="@color/colorBlack"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"

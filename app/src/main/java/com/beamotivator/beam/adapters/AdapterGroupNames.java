@@ -2,6 +2,7 @@ package com.beamotivator.beam.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,7 +45,7 @@ public class AdapterGroupNames extends RecyclerView.Adapter<AdapterGroupNames.Ho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HolderGroupNames holder, int position) {
+    public void onBindViewHolder(@NonNull final HolderGroupNames holder, int position) {
 
         ModelGroupNames model = groupNames.get(position);
 
@@ -56,7 +58,12 @@ public class AdapterGroupNames extends RecyclerView.Adapter<AdapterGroupNames.Ho
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                SharedPreferences choice = context.getSharedPreferences("groupChosen",Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = choice.edit();
+//                editor.putString("group",groupTitle);
+//                editor.apply();
                 Intent gintent = new Intent("custom-message");
+                Toast.makeText(context, "Don't click me", Toast.LENGTH_SHORT).show();
                 gintent.putExtra("groupName",groupTitle);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(gintent);
 
@@ -73,10 +80,12 @@ public class AdapterGroupNames extends RecyclerView.Adapter<AdapterGroupNames.Ho
     static class HolderGroupNames extends RecyclerView.ViewHolder{
 
         TextView gNames;
+        CardView groupCard;
 
         public HolderGroupNames(@NonNull View itemView) {
             super(itemView);
             gNames = itemView.findViewById(R.id.postTypeTv);
+            groupCard = itemView.findViewById(R.id.groupNamesCard);
         }
     }
 

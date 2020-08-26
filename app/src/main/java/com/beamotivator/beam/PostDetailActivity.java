@@ -683,7 +683,7 @@ RelativeLayout pImage22;
                     likesRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String likes = snapshot.child(postId).child("pLikes").getValue().toString();
+                            String likes = Objects.requireNonNull(snapshot.child(postId).child("pLikes").getValue()).toString();
                             pLikesTv.setText(likes + " Likes");
                         }
 

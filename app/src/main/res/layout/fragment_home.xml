@@ -279,7 +279,7 @@
                     android:layout_height="@dimen/spacing_xmlarge"
                     android:background="@android:color/transparent"
                     android:tint="@color/colorBlack"
-                    app:srcCompat="@drawable/ic_home" />
+                    app:srcCompat="@drawable/ic_info" />
 
                 <View
                     android:layout_width="5dp"

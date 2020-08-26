@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -47,7 +48,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beamotivator.beam.adapters.AdapterGroupNames;
+import com.beamotivator.beam.adapters.AdapterMyGroups;
 import com.beamotivator.beam.models.ModelGroupNames;
+import com.beamotivator.beam.models.ModelMyGroups;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -85,6 +88,7 @@ public class AddPostActivity extends AppCompatActivity  {
     private ImageButton dropArrow;
     DatabaseReference userDb;
     ProgressDialog pd;
+    SharedPreferences sh;
 
     //intent message from broadcast
     String bGroupName=null;
@@ -148,6 +152,17 @@ public class AddPostActivity extends AppCompatActivity  {
         inputChoice = findViewById(R.id.inputChoiceTv);
         groupNamesRv = findViewById(R.id.groupNameRv);
         dropArrow = findViewById(R.id.dropIcon);
+
+        //sh = getSharedPreferences("groupChosen",MODE_PRIVATE);
+
+     //  String groupName = sh.getString("group",null);
+
+//        if(groupName != null)
+//        {
+//            inputChoice.setText(groupName);
+//            groupNamesRv.setVisibility(View.GONE);
+//        }
+       // Toast.makeText(this, ""+groupName, Toast.LENGTH_SHORT).show();
 
         groupNamesRv.setVisibility(View.INVISIBLE);
 
@@ -278,18 +293,19 @@ public class AddPostActivity extends AppCompatActivity  {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Groups");
 
         ref.orderByChild("groupTitle").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                groupNames.clear();
-                for(DataSnapshot ds:snapshot.getChildren())
-                {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            groupNames.clear();
+            String myUid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
+            for (DataSnapshot ds : snapshot.getChildren()) {
+                if (ds.child("Participants").hasChild(myUid)) {
                     ModelGroupNames model = ds.getValue(ModelGroupNames.class);
 
                     //String name =""+model.getGroupTitle();
                     groupNames.add(model);
 
                     //init adapter
-                    adapterGroups = new AdapterGroupNames(getApplicationContext(),groupNames);
+                    adapterGroups = new AdapterGroupNames(getApplicationContext(), groupNames);
 
                     //set adapter to recycler view
                     groupNamesRv.setAdapter(adapterGroups);
@@ -297,6 +313,7 @@ public class AddPostActivity extends AppCompatActivity  {
 
 
             }
+        }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -410,8 +427,7 @@ public class AddPostActivity extends AppCompatActivity  {
                                                              }
                                                         });
 
-
-
+                                                setLikesNode(pId);
 
                                                 startActivity(new Intent(AddPostActivity.this, DashboardActivity.class));
                                                 finish();
@@ -479,22 +495,11 @@ public class AddPostActivity extends AppCompatActivity  {
                             apImage.setImageURI(null);
                             image_rui = null;
 
-                            HashMap<Object,String> likesHash = new HashMap<>();
-                            likesHash.put("pLikes","0");
-                            likesHash.put("pId",pId);
+                            setLikesNode(pId);
 
-                            DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference("Likes");
-                            likesRef.child(pId).setValue(likesHash)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                         }
-                                    });
+                            startActivity(new Intent(AddPostActivity.this, DashboardActivity.class));
+                            finish();
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -506,6 +511,28 @@ public class AddPostActivity extends AppCompatActivity  {
             });
         }
     }
+
+    private void setLikesNode(String id) {
+
+        HashMap<Object,String> likesHash = new HashMap<>();
+        likesHash.put("pLikes","0");
+        likesHash.put("pId",id);
+
+        DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference("Likes");
+        likesRef.child(id).setValue(likesHash)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+
+    }
+
 
     private void  showImagePickDialog() {
         if(!checkStoragePermissions())
@@ -592,6 +619,7 @@ public class AddPostActivity extends AppCompatActivity  {
         @Override
         public void onReceive(Context context, Intent intent) {
             bGroupName = intent.getStringExtra("groupName");
+            Toast.makeText(context, ""+bGroupName, Toast.LENGTH_SHORT).show();
             inputChoice.setText(bGroupName);
             groupNamesRv.setVisibility(View.INVISIBLE);
         }

@@ -99,7 +99,7 @@ ProgressBar prgresbarlogin;
 
         signIn = findViewById(R.id.SignIn);
       GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("444026620385-63bcinfreu193nga04u936skv895obvo.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -130,7 +130,7 @@ ProgressBar prgresbarlogin;
             Uri personPhoto = acct.getPhotoUrl();
             final String proPic = Objects.requireNonNull(personPhoto).toString();
             final String name = personName.substring(0, personName.lastIndexOf(" "));
-            if(personEmail.endsWith("christuniversity.in")) {
+            //if(personEmail.endsWith("christuniversity.in")) {
                 credential = GoogleAuthProvider.getCredential(idToken, null);
                 mAuth.signInWithCredential(credential)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -240,12 +240,12 @@ ProgressBar prgresbarlogin;
                         Toast.makeText(MainActivity.this, "Error:" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-            else {
-                prgresbarlogin.setVisibility(View.GONE);
-                mGoogleSignInClient.signOut();
-                Toast.makeText(this, "Not a valid Christ account"+personEmail, Toast.LENGTH_SHORT).show();
-            }
+//            }
+//            else {
+//                prgresbarlogin.setVisibility(View.GONE);
+//                mGoogleSignInClient.signOut();
+//                Toast.makeText(this, "Not a valid Christ account"+personEmail, Toast.LENGTH_SHORT).show();
+//            }
         }
     }
 
